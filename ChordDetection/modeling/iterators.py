@@ -6,49 +6,45 @@ import os
 import numpy as np
 
 class PreprocessFeatures:
-    
-    def __init__(self, feat_dir, targets_dir, feat_aligned_dir, targ_aligned_dir):
-        self.feat_dir = feat_dir
-        self.targets_dir = targets_dir
-        self.feat_dir_aligned = feat_aligned_dir
-        self.targ_aligned_dir = targ_aligned_dir
+    def __init__(self, cur_dir, dir_aligned):
+        self.cur_dir = cur_dir
+        self.dir_aligned = dir_aligned
         
     def align(self):
-        targets = os.listdir(self.targets_dir)
-        features = os.listdir(self.feat_dir)
-        i = 0
+        for folder in os.listdir(self.cur_dir):
+            files = os.listdir(self.cur_dir+folder)
+            features = np.load(self.cur_dir+folder+'/'+files[0], allow_pickle=True)
+            targets = np.load(self.cur_dir+folder+'/'+files[1], allow_pickle=True)
         
-        assert len(targets) == len(features)
-        
-        for i in range(len(targets)):
-            feature = np.load(self.feat_dir+'/'+features[i])
-            target = np.load(self.targets_dir+'/'+targets[i])
-            feat_num_frames = feature.shape[0]
-            targ_num_frames = target.shape[0]
+            feat_num_frames = features.shape[0]
+            targ_num_frames = targets.shape[0]
             
             if feat_num_frames != targ_num_frames:
                 diff = feat_num_frames - targ_num_frames
                 if diff < 0:
-                    target[feat_num_frames:, :] = target[feat_num_frames]
-                    feature = np.vstack((feature, np.tile(feature[-1], (abs(diff),1))))
+                    targets =  targets[:feat_num_frames, :]
                 else:
-                    feature[targ_num_frames:, :] = feature[targ_num_frames]
-                    target = np.vstack((target, np.tile(target[-1], (abs(diff),1))))
-                    
-            assert feature.shape == target.shape
+                    features = features[:targ_num_frames:, :]
             
-            np.save(self.feat_dir_aligned+'/'+features[i], feature)
-            np.save(self.targets_dir_aligned+'/'+targets[i], target)
+            assert features.shape[0] == targets.shape[0]
             
-            i += 1
+            os.mkdir(self.dir_aligned+folder)
+            
+            np.save(self.dir_aligned+folder+'/'+files[0], features)
+            np.save(self.dir_aligned+folder+'/'+files[1], targets)
+            
             
     def standardize(self):
+        raise NotImplementedError('Implement this.')
         
-        
-        
-    
-    
-    
+cur_dir = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/mcgill-billboard-prep/'
+aligned_dir = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/mcgill-billboard-aligned/'
+
+Prep_obj = PreprocessFeatures(cur_dir, aligned_dir)
+
+Prep_obj.align()
+
+
 class BatchIterator:
     
     def __init__(self, batch_size, context_size, augment=True, iscontext=True, randomise=True):
@@ -68,7 +64,7 @@ class BatchIterator:
                 target_size = target.shape[0]
                 spec_size = spec.shape[0]
                 if self.pad:
-                    padding = np.
-                
+                    padding = np.zeros(4)
+    
                 
         

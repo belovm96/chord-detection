@@ -42,11 +42,9 @@ aligned_dir = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/mcgill-billbo
 
 Prep_obj = PreprocessFeatures(cur_dir, aligned_dir)
 
-Prep_obj.align()
-
+#Prep_obj.align()
 
 class BatchIterator:
-    
     def __init__(self, batch_size, context_size, augment=True, iscontext=True, randomise=True):
         self.batch_size = batch_size
         self.context_size = context_size
@@ -63,7 +61,7 @@ class BatchIterator:
                 target = np.load(target_path+'/'+targets[i])
                 target_size = target.shape[0]
                 spec_size = spec.shape[0]
-                if self.pad:
+                if self.context:
                     padding = np.zeros(4)
     
                 

@@ -63,7 +63,7 @@ path_convert_from = path_renamed
 path_convert_to = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/download/billboard_wav_renamed'
 
 dr_obj = DataWrangling(path_rename, path_renamed, path_convert_to, path_convert_from)
-"""
+
 for song in os.listdir(path_rename):
     dr_obj.audio_rename(path_rename+'/'+song, path_renamed)
 
@@ -80,6 +80,6 @@ for i, song in enumerate(os.listdir(path_convert_to)):
 song_anns_path = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/billboard-2.0-salami_chords.tar/McGill-Billboard'
 save_songs_path = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/McGill-Billboard'
 dr_obj.manage_anns(songs_prep, song_anns_path, save_songs_path)
-"""
+
    
 

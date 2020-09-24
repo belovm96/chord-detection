@@ -6,7 +6,20 @@ Credit to @fdlm whose script was used as skeleton code
 import numpy as np
 from scipy.ndimage import shift
 import random
-from targets import one_hot
+
+
+def one_hot(class_ids, num_classes):
+    """
+    Create one-hot encoding of class ids
+    """
+    class_ids = class_ids.astype(int)
+    oh = np.zeros((len(class_ids), num_classes), dtype=np.float32)
+    oh[np.arange(len(class_ids)), class_ids] = 1
+
+    assert (oh.argmax(axis=1) == class_ids).all()
+    assert (oh.sum(axis=1) == 1).all()
+
+    return oh
 
 
 class SemitoneShift:
@@ -47,34 +60,32 @@ class SemitoneShift:
             new_targets[i] = np.roll(targets[i], shifts[i], axis=-1)
         return new_targets
 
-    def __call__(self, batch_iterator):
+    def __call__(self, batch_iterator, batch_size):
         """
         :param batch_iterator: data iterator that yields the data to be
                                augmented
         :return: augmented data/target pairs
         """
 
-        for data, targets in batch_iterator:
-            batch_size = len(data)
+        shifts = np.random.randint(-self.max_shift,
+                                   self.max_shift + 1, batch_size)
 
-            shifts = np.random.randint(-self.max_shift,
-                                       self.max_shift + 1, batch_size)
-
-            no_shift = random.sample(range(batch_size),
-                                     int(batch_size * (1 - self.p)))
-            shifts[no_shift] = 0
-
-            new_targets = self.adapt_targets(targets, shifts)
-
-
-            new_data = np.empty_like(data)
-            for i in range(batch_size):
-                # TODO: remove data from upper and lower parts that got
-                #       rolled (?)
-                new_data[i] = np.roll(
-                    data[i], shifts[i] * self.bins_per_semitone, axis=-1)
-
-            yield new_data, new_targets
+        no_shift = random.sample(range(batch_size),
+                                 int(batch_size * (1 - self.p)))
+        
+        shifts[no_shift] = 0
+        new_data = []
+        targ = np.zeros((batch_size, 25))
+        i = 0
+        for data, target in batch_iterator:
+            targ[i, :] = target
+            new_data.append(np.roll(
+                data, shifts[i] * self.bins_per_semitone, axis=-1).transpose())
+            i += 1
+            
+        new_targets = self.adapt_targets(targ, shifts)
+        
+        return new_data, new_targets
 
 
 class Detuning:
@@ -92,25 +103,26 @@ class Detuning:
         self.max_shift = max_shift
         self.bins_per_semitone = bins_per_semitone
 
-    def __call__(self, batch_iterator):
+    def __call__(self, batch_iterator, batch_size):
         """
         :param batch_iterator: data iterator that yields the data to be
                                augmented
         :return: augmented data/target pairs
         """
-        for data, targets in batch_iterator:
-            batch_size = len(data)
+           
+        shifts = np.random.rand(batch_size) * 2 * self.max_shift - \
+            self.max_shift
 
-            shifts = np.random.rand(batch_size) * 2 * self.max_shift - \
-                self.max_shift
+        no_shift = random.sample(range(batch_size),
+                                 int(batch_size * (1 - self.p)))
+        shifts[no_shift] = 0
 
-            no_shift = random.sample(range(batch_size),
-                                     int(batch_size * (1 - self.p)))
-            shifts[no_shift] = 0
-
-            new_data = np.empty_like(data)
-            for i in range(batch_size):
-                new_data[i] = shift(
-                    data[i], (shifts[i] * self.bins_per_semitone, 0))
-
-            yield new_data, targets
+        new_data = []
+        targets = []
+        i = 0
+        for data, target in batch_iterator:
+            targets.append(target)
+            new_data.append(shift(
+                data, (shifts[i] * self.bins_per_semitone, 0)).transpose())
+            i += 1
+        return new_data, targets

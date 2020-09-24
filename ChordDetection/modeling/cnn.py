@@ -3,10 +3,13 @@ CNN model for feature extraction
 @belom96
 """
 import tensorflow as tf
+import warnings
+warnings.filterwarnings('ignore')
 from tensorflow.keras import layers, models
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, CSVLogger
 from iterators import Batch
-
+from tensorflow.python.client import device_lib
+print(device_lib.list_local_devices())
 
 model = models.Sequential()
 model.add(layers.Conv2D(32, 3, activation='relu', input_shape=(1, 105, 15), padding='same', data_format='channels_first'))
@@ -55,7 +58,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 
-checkpoint_dir = 'C:/Users/Mikhail/OneDrive/Documents/GitHub/chord-detection/ChordDetection/modeling/checkpoint'
+checkpoint_dir = '/home/ubuntu/chord-detection/ChordDetection/modeling/checkpoint'
 EPOCHS = 500
 BATCH_SIZE = 100
 CONTEXT_W = 7
@@ -74,7 +77,7 @@ callbacks = [
         ]
 
 
-path_to_data = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/mcgill-billboard-aligned/'
+path_to_data = '/home/ubuntu/mcgill-billboard-aligned/'
 batch_obj = Batch(BATCH_SIZE, CONTEXT_W, path_to_data)
 training_generator = batch_obj.train_generator()
 validation_generator = batch_obj.val_generator()

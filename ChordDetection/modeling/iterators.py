@@ -46,7 +46,7 @@ class Batch:
         self.context_size = context_size
         self.augment = augment
         if self.augment:
-            self.shift_sem = SemitoneShift(0.3, 4, 2)
+            self.shift_sem = SemitoneShift(0.3, 1, 2)
             self.detune = Detuning(0.3, 0.4, 2)
 
         self.randomise = randomise
@@ -88,9 +88,10 @@ class Batch:
             if self.augment:
                 rand_int = np.random.randint(2, size=1)
                 if rand_int == 0:
-                    batch = self.shift_sem(batch, self.batch_size)
-                else:
                     batch = self.detune(batch, self.batch_size)
+                else:
+                    continue
+                    batch = self.shift_sem(batch, self.batch_size)
                     
             data_batch = np.array(batch[0])
             targets = np.array(batch[1])

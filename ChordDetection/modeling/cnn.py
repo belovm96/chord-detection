@@ -8,8 +8,6 @@ warnings.filterwarnings('ignore')
 from tensorflow.keras import layers, models
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, CSVLogger
 from iterators import Batch
-from tensorflow.python.client import device_lib
-print(device_lib.list_local_devices())
 
 model = models.Sequential()
 model.add(layers.Conv2D(32, 3, activation='relu', input_shape=(1, 105, 15), padding='same', data_format='channels_first'))
@@ -80,14 +78,13 @@ callbacks = [
 path_to_data = '/home/ubuntu/mcgill-billboard-aligned/'
 batch_obj = Batch(BATCH_SIZE, CONTEXT_W, path_to_data)
 training_generator = batch_obj.train_generator()
-validation_generator = batch_obj.val_generator()
+#validation_generator = batch_obj.val_generator()
 
 
 steps_per_epoch = TOTAL_FRAMES // BATCH_SIZE
 
 model.fit_generator(
         generator=training_generator,
-        validation_data=validation_generator,
         callbacks=callbacks,
         steps_per_epoch=100000,
         epochs=EPOCHS, verbose=True

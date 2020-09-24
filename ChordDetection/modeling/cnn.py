@@ -92,4 +92,5 @@ model.fit_generator(
         steps_per_epoch=steps_per_epoch,
         epochs=EPOCHS, verbose=True, 
         )
+model.save('/home/ubuntu/chord-detection/ChordDetection/modeling/')
 

@@ -113,7 +113,7 @@ class Batch:
             targets = batch[0][1]
             
             batch_scaled = preprocessing.scale(batch_data)
-            batch_scaled = batch_scaled.reshape(1, batch_scaled.shape[1], batch_scaled.shape[0]).shape
+            batch_scaled = batch_scaled.reshape(1, batch_scaled.shape[1], batch_scaled.shape[0])
             targets = targets.reshape(1, targets.shape[0])
             
             batch_scaled = np.reshape(batch_scaled, (self.batch_size, 1, batch_scaled.shape[1], batch_scaled.shape[2]))
@@ -126,7 +126,7 @@ class Batch:
             targets = batch[0][1]
             
             batch_scaled = preprocessing.scale(batch_data)
-            batch_scaled = batch_scaled.reshape(1, batch_scaled.shape[1], batch_scaled.shape[0]).shape
+            batch_scaled = batch_scaled.reshape(1, batch_scaled.shape[1], batch_scaled.shape[0])
             targets = targets.reshape(1, targets.shape[0])
             
             batch_scaled = np.reshape(batch_scaled, (self.batch_size, 1, batch_scaled.shape[1], batch_scaled.shape[2]))

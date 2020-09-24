@@ -83,7 +83,7 @@ class Batch:
                         b_size -= 1
                         if b_size == 0:
                             yield batch
-                            if batch_bool:
+                            if split == 'train':
                                 b_size = self.batch_size
                             else:
                                 b_size = 1

@@ -9,6 +9,7 @@ from tensorflow.keras import layers, models
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, CSVLogger
 from iterators import Batch
 
+
 model = models.Sequential()
 model.add(layers.Conv2D(32, 3, activation='relu', input_shape=(1, 105, 15), padding='same', data_format='channels_first'))
 model.add(layers.Dropout(0.5))
@@ -57,8 +58,8 @@ model.compile(optimizer='adam',
 
 
 checkpoint_dir = '/home/ubuntu/chord-detection/ChordDetection/modeling/checkpoint'
-EPOCHS = 50
-BATCH_SIZE = 100
+EPOCHS = 20
+BATCH_SIZE = 500
 CONTEXT_W = 7
 TOTAL_FRAMES = 720000
 
@@ -68,7 +69,7 @@ callbacks = [
         ModelCheckpoint(
             filepath=checkpoint_dir,
             verbose=1,
-            save_best_only=False,
+            save_best_only=True,
             save_weights_only=True
             ),
         CSVLogger('training.log')
@@ -78,19 +79,21 @@ callbacks = [
 path_to_train = '/home/ubuntu/mcgill-billboard-train/'
 path_to_val = '/home/ubuntu/mcgill-billboard-val/'
 path_to_test = '/home/ubuntu/mcgill-billboard-test/'
-batch_obj = Batch(BATCH_SIZE, CONTEXT_W, path_to_train, path_to_test , path_to_val)
-training_generator = batch_obj.train_generator()
-validation_generator = batch_obj.val_generator()
-
+batch_obj_1 = Batch(BATCH_SIZE, CONTEXT_W, path_to_train, path_to_test, path_to_val)
+batch_obj_2 = Batch(BATCH_SIZE, CONTEXT_W, path_to_train, path_to_test, path_to_val)
+training_generator = batch_obj_1.train_generator()
+validation_generator = batch_obj_2.val_generator()
 
 steps_per_epoch = TOTAL_FRAMES // BATCH_SIZE
 
-model.fit_generator(
-        generator=training_generator,
+model.fit(
+        training_generator,
         validation_data=validation_generator,
+        validation_steps=70000,
         callbacks=callbacks,
         steps_per_epoch=steps_per_epoch,
         epochs=EPOCHS, verbose=True, 
         )
+
 model.save('/home/ubuntu/chord-detection/ChordDetection/modeling/')
 

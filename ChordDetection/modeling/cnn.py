@@ -57,7 +57,7 @@ model.compile(optimizer='adam',
 
 
 checkpoint_dir = '/home/ubuntu/chord-detection/ChordDetection/modeling/checkpoint'
-EPOCHS = 500
+EPOCHS = 50
 BATCH_SIZE = 100
 CONTEXT_W = 7
 TOTAL_FRAMES = 720000

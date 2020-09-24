@@ -41,7 +41,7 @@ aligned_dir = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/mcgill-billbo
 
 
 class Batch:
-    def __init__(self, batch_size, context_size, path_to_data, augment=True, randomise=False):
+    def __init__(self, batch_size, context_size,  path_to_train, path_to_test, path_to_val, augment=True, randomise=False):
         self.batch_size = batch_size
         self.context_size = context_size
         self.augment = augment
@@ -50,13 +50,20 @@ class Batch:
             self.detune = Detuning(0.3, 0.4, 2)
 
         self.randomise = randomise
-        self.path_to_data = path_to_data
+        self.path_to_train = path_to_train
+        self.path_to_val = path_to_val
+        self.path_to_test = path_to_test
         
-    def _generator(self, batch_bool):
-        if batch_bool:
+    def _generator(self, split):
+        if split == 'train':
             b_size = self.batch_size
+            self.path_to_data = self.path_to_train
+        elif split == 'val':
+            b_size = 1
+            self.path_to_data = self.path_to_val
         else:
             b_size = 1
+            self.path_to_data = self.path_to_test
 
         num_frames = 2 * self.context_size + 1
 
@@ -84,7 +91,7 @@ class Batch:
 
 
     def train_generator(self):
-        for batch in self._generator(True):
+        for batch in self._generator('train'):
             if self.augment:
                 rand_int = np.random.randint(2, size=1)
                 if rand_int == 0:
@@ -101,7 +108,7 @@ class Batch:
         
     
     def val_generator(self):
-        for batch in self._generator(False):
+        for batch in self._generator('val'):
             batch_data = batch[0][0]
             targets = batch[0][1]
             
@@ -114,7 +121,7 @@ class Batch:
             yield batch_scaled, targets
     
     def test_generator(self):
-       for batch in self._generator(False):
+       for batch in self._generator('test'):
             batch_data = batch[0][0]
             targets = batch[0][1]
             

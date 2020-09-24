@@ -60,7 +60,7 @@ checkpoint_dir = '/home/ubuntu/chord-detection/ChordDetection/modeling/checkpoin
 EPOCHS = 500
 BATCH_SIZE = 100
 CONTEXT_W = 7
-TOTAL_FRAMES = 800000
+TOTAL_FRAMES = 720000
 
 callbacks = [
         EarlyStopping(patience=5, verbose=1),
@@ -75,18 +75,21 @@ callbacks = [
         ]
 
 
-path_to_data = '/home/ubuntu/mcgill-billboard-aligned/'
-batch_obj = Batch(BATCH_SIZE, CONTEXT_W, path_to_data)
+path_to_train = '/home/ubuntu/mcgill-billboard-train/'
+path_to_val = '/home/ubuntu/mcgill-billboard-val/'
+path_to_test = '/home/ubuntu/mcgill-billboard-test/'
+batch_obj = Batch(BATCH_SIZE, CONTEXT_W, path_to_train, path_to_test , path_to_val)
 training_generator = batch_obj.train_generator()
-#validation_generator = batch_obj.val_generator()
+validation_generator = batch_obj.val_generator()
 
 
 steps_per_epoch = TOTAL_FRAMES // BATCH_SIZE
 
 model.fit_generator(
         generator=training_generator,
+        validation_data=validation_generator,
         callbacks=callbacks,
         steps_per_epoch=100000,
-        epochs=EPOCHS, verbose=True
+        epochs=EPOCHS, verbose=True, 
         )
 

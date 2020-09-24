@@ -89,7 +89,7 @@ model.fit_generator(
         generator=training_generator,
         validation_data=validation_generator,
         callbacks=callbacks,
-        steps_per_epoch=100000,
+        steps_per_epoch=steps_per_epoch,
         epochs=EPOCHS, verbose=True, 
         )
 

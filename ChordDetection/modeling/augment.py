@@ -46,7 +46,7 @@ class SemitoneShift:
         no_chord_class = targets.shape[-1] - 1
         no_chords = (chord_classes == no_chord_class)
         chord_roots = chord_classes % 12
-        chord_majmin = chord_classes / 12
+        chord_majmin = chord_classes // 12
 
         new_chord_roots = (chord_roots + shifts) % 12
         new_chord_classes = new_chord_roots + chord_majmin * 12
@@ -54,19 +54,7 @@ class SemitoneShift:
         new_targets = one_hot(new_chord_classes, no_chord_class + 1)
         return new_targets
 
-    def _adapt_targets_chroma(self, targets, shifts):
-        new_targets = np.empty_like(targets)
-        for i in range(len(targets)):
-            new_targets[i] = np.roll(targets[i], shifts[i], axis=-1)
-        return new_targets
-
     def __call__(self, batch_iterator, batch_size):
-        """
-        :param batch_iterator: data iterator that yields the data to be
-                               augmented
-        :return: augmented data/target pairs
-        """
-
         shifts = np.random.randint(-self.max_shift,
                                    self.max_shift + 1, batch_size)
 
@@ -84,19 +72,17 @@ class SemitoneShift:
             i += 1
             
         new_targets = self.adapt_targets(targ, shifts)
-        
-        return new_data, new_targets
+
+        targets = []
+
+        for i in range(len(new_data)):
+            targets.append(new_targets[i, :])
+
+        return new_data, targets
 
 
 class Detuning:
     def __init__(self, p, max_shift, bins_per_semitone):
-        """
-        Augmenter that shifts a spectrogram with logarithmically spaced
-        frequency bins by maximum 0.5 semitones
-        :param p: percentage of data to be shifted
-        :param max_shift: maximum fraction of semitone to shirt (<= 0.5)
-        :param bins_per_semitone: number of spectrogram bins per semitone
-        """
         if max_shift >= 0.5:
             raise ValueError('Detuning only works up to half a semitone!')
         self.p = p
@@ -104,12 +90,6 @@ class Detuning:
         self.bins_per_semitone = bins_per_semitone
 
     def __call__(self, batch_iterator, batch_size):
-        """
-        :param batch_iterator: data iterator that yields the data to be
-                               augmented
-        :return: augmented data/target pairs
-        """
-           
         shifts = np.random.rand(batch_size) * 2 * self.max_shift - \
             self.max_shift
 
@@ -125,4 +105,5 @@ class Detuning:
             new_data.append(shift(
                 data, (shifts[i] * self.bins_per_semitone, 0)).transpose())
             i += 1
+            
         return new_data, targets

@@ -1,7 +1,7 @@
 """
-Generate Logarithmically Filtered Spectrograms for McGill Billboard's audio files
-@belovm96
+Generate Logarithmically Filtered Spectrograms
 Credit to @fdlm whose script was used as skeleton code
+@belovm96
 """
 import madmom as mm
 import os

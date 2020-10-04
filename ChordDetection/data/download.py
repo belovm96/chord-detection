@@ -1,5 +1,5 @@
 """
-Extracts list of songs $ download them
+Extracts list of songs and download them
 @belovm96
 """
 

@@ -1,7 +1,6 @@
 """
-Audio data management script
-
-@author: Mikhail
+Data Format Conversion and Annotation Matching Script
+@belovm96
 """
 import os
 import shutil

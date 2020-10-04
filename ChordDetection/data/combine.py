@@ -1,7 +1,7 @@
 """
-Created on Wed Sep 23 00:04:15 2020
+Data Management Script
 
-@author: Mikhail
+@author: belovm96
 """
 import os
 import shutil

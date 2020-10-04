@@ -1,7 +1,7 @@
 """
 Process Chord Annotations - Create target chord annotation per frame
-@belovm96
 Credit to @fdlm's targets.py which I used as a skeleton code for this script
+@belovm96
 """
 
 import numpy as np

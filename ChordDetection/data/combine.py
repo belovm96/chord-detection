@@ -1,7 +1,6 @@
 """
 Data Management Script
-
-@author: belovm96
+@belovm96
 """
 import os
 import shutil

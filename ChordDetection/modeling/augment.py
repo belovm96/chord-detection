@@ -24,14 +24,6 @@ def one_hot(class_ids, num_classes):
 
 class SemitoneShift:
     def __init__(self, p, max_shift, bins_per_semitone, target_type='chords_maj_min'):
-        """
-        Augmenter that shifts by semitones a spectrum with logarithmically
-        spaced frequency bins.
-        :param p: percentage of data to be shifted
-        :param max_shift: maximum number of semitones to shift
-        :param bins_per_semitone: number of spectrogram bins per semitone
-        :param target_type: specifies target type
-        """
         self.p = p
         self.max_shift = max_shift
         self.bins_per_semitone = bins_per_semitone
@@ -105,5 +97,5 @@ class Detuning:
             new_data.append(shift(
                 data, (shifts[i] * self.bins_per_semitone, 0)).transpose())
             i += 1
-            
+    
         return new_data, targets

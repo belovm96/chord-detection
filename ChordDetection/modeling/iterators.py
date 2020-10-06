@@ -7,7 +7,9 @@ import numpy as np
 import random
 from sklearn import preprocessing
 from augment import SemitoneShift, Detuning
-
+from keras.models import load_model
+import warnings
+warnings.filterwarnings('ignore')
 
 class PreprocessFeatures:
     def __init__(self, cur_dir, dir_aligned):
@@ -38,7 +40,8 @@ class PreprocessFeatures:
 
 
 class Batch:
-    def __init__(self, batch_size, context_size, path_to_train, path_to_test, path_to_val, augment=True, randomise=True):
+    def __init__(self, batch_size, context_size, path_to_train, path_to_test, path_to_val, augment=False, randomise=True):
+        self.model = load_model('/home/ubuntu/chord-detection/ChordDetection/modeling/cnn_extractor.h5')
         self.batch_size = batch_size
         self.context_size = context_size
         self.augment = augment
@@ -50,7 +53,6 @@ class Batch:
         self.path_to_val = path_to_val
         self.path_to_test = path_to_test
 
-    
     def _generator(self, split):
         if split == 'train':
             b_size = self.batch_size
@@ -89,6 +91,55 @@ class Batch:
                                 b_size = 1
                             batch = []
 
+
+    def _generator_seq(self, split):
+        if split == 'train':
+            self.path_to_data = self.path_to_train
+            b_size = self.batch_size
+        elif split == 'val':
+            self.path_to_data = self.path_to_val 
+            b_size = 1
+        else:
+            self.path_to_data = self.path_to_test
+            b_size = 1
+
+        num_frames = 2 * self.context_size + 1
+        seq_frames = 1024
+        feature_dim = 128
+        num_classes = 25
+        batch = []
+        
+        while True:
+            spec_batch = np.zeros((b_size, seq_frames, feature_dim))
+            target_batch = np.zeros((b_size, seq_frames))
+            folders = os.listdir(self.path_to_data)
+            if self.randomise and split == 'train':
+                random.shuffle(folders)
+            batch_num = 0
+            for folder in folders:
+                spec = np.load(self.path_to_data+folder+'/'+'features.npy')
+                target = np.load(self.path_to_data+folder+'/'+'targets_seq.npy')
+                spec_batch[batch_num, :, :] = spec
+                target_batch[batch_num, :] = target
+                batch_num += 1
+                if batch_num == b_size:
+                    yield spec_batch, target_batch
+                    batch_num = 0
+                    spec_batch = np.zeros((b_size, seq_frames, feature_dim))
+                    target_batch = np.zeros((b_size, seq_frames))
+    
+    def train_generator_seq(self):
+        for data, targets in self._generator_seq('train'):
+            yield data, targets
+
+    def val_generator_seq(self):
+        for data, targets in self._generator_seq('val'):
+            yield data, targets
+
+    def test_generator_seq(self):
+        for data, targets in self._generator_seq('val'):
+            yield data, targets
+
                     
     def train_generator(self):
         for batch in self._generator('train'):
@@ -125,10 +176,42 @@ class Batch:
     
     def test_generator(self):
        for batch in self._generator('test'):
-            batch_data = batch[0][0]
-            targets = batch[0][1]
-            batch_scaled = preprocessing.scale(batch_data)
-            batch_scaled = batch_scaled.transpose()
-            batch_scaled = batch_scaled.reshape(1, 1, batch_scaled.shape[0], batch_scaled.shape[1])
-            targets = targets.reshape(1, targets.shape[0])
+            batch_scaled = np.zeros((1, 1, batch[0][0].shape[1], batch[0][0].shape[0]))
+            targets = np.zeros((1, batch[0][1].shape[0]))
+            ex_prep = batch[0][0].transpose()
+            batch_scaled[0, 0, :, :] = ex_prep
+            targets[0, :] = batch[0][1]
             yield batch_scaled, targets
+
+                    
+    def generate_features(self, split):
+        if split == 'train':
+            self.path_to_data = self.path_to_train
+        elif split == 'val':
+            self.path_to_data = self.path_to_val 
+        else:
+            self.path_to_data = self.path_to_test
+
+        num_frames = 2 * self.context_size + 1
+        seq_frames = 1024
+        feature_dim = 128
+        num_classes = 1
+    
+        folders = os.listdir(self.path_to_data)
+        for folder in folders:
+            files = os.listdir(self.path_to_data+folder)
+            spec = np.load(self.path_to_data+folder+'/'+'spec.npy')
+            target = np.load(self.path_to_data+folder+'/'+'target.npy')
+            spec_cur = np.zeros((seq_frames, feature_dim))
+            target_cur = np.zeros((seq_frames))
+            if self.context_size:
+                for i in range(seq_frames):
+                    spec_frame = spec[i:num_frames+i, :]
+                    spec_frame = preprocessing.scale(spec_frame).transpose().reshape((1, 1, spec_frame.shape[1], spec_frame.shape[0]))
+                    feature = self.model.predict(spec_frame)
+                    spec_cur[i, :] = feature
+                    ind = target[i+self.context_size, :].argmax()
+                    target_cur[i] = ind
+                np.save(self.path_to_data+folder+'/'+'features.npy', spec_cur)
+                np.save(self.path_to_data+folder+'/'+'targets_seq.npy', target_cur)
+

@@ -3,11 +3,11 @@ CNN model for feature extraction
 @belom96
 """
 import tensorflow as tf
-import warnings
-warnings.filterwarnings('ignore')
 from tensorflow.keras import layers, models
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, CSVLogger
 from iterators import Batch
+import warnings
+warnings.filterwarnings('ignore')
 
 
 model = models.Sequential()
@@ -51,28 +51,27 @@ model.add(layers.AveragePooling2D((13, 3), data_format='channels_first'))
 model.add(layers.Flatten())
 model.add(layers.Softmax())
 
-
 model.compile(optimizer='adam',
               loss=tf.keras.losses.CategoricalCrossentropy(from_logits=False),
               metrics=['accuracy'])
 
 
-checkpoint_dir = '/home/ubuntu/chord-detection/ChordDetection/modeling/checkpoint_1'
-EPOCHS = 40
+checkpoint_dir = '/home/ubuntu/chord-detection/ChordDetection/modeling/models/model_exp_6/model_01_drop_0001_lr'
+EPOCHS = 50
 BATCH_SIZE = 500
 CONTEXT_W = 7
-TOTAL_FRAMES = 720000
+TOTAL_FRAMES = 800000
 
 callbacks = [
         EarlyStopping(patience=5, verbose=1),
-        ReduceLROnPlateau(factor=0.1, patience=5, min_lr=0.00001, verbose=1),
+        ReduceLROnPlateau(factor=0.1, patience=3, min_lr=0.00001, verbose=1),
         ModelCheckpoint(
             filepath=checkpoint_dir,
             verbose=1,
             save_best_only=True,
             save_weights_only=True
             ),
-        CSVLogger('training_1.log')
+        CSVLogger('/home/ubuntu/chord-detection/ChordDetection/modeling/models/model_exp_6/training.log')
         ]
 
 
@@ -87,15 +86,13 @@ validation_generator = batch_obj_2.val_generator()
 
 steps_per_epoch = TOTAL_FRAMES // BATCH_SIZE
 
-#model.load_weights(checkpoint_dir)
-
 model.fit(
         training_generator,
         validation_data=validation_generator,
-        validation_steps=100000,
+        validation_steps=80000,
         callbacks=callbacks,
         steps_per_epoch=steps_per_epoch,
         epochs=EPOCHS, verbose=True, 
         )
 
-model.save('/home/ubuntu/chord-detection/ChordDetection/modeling/models')
+model.save('/home/ubuntu/chord-detection/ChordDetection/modeling/models/model_exp_6/model_01_drop_0001_lr.h5')

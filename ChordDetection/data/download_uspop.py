@@ -16,8 +16,7 @@ song_lst = open('C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/songs_uspop
 for song in songs: 
     song_lst.write(song+'\n')
 song_lst.close()
-"""
+
 write_to = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/uspop-mp3'
 
 os.system(f'spotdl --list=C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/songs_uspop.txt --overwrite skip -f {write_to}')
-"""

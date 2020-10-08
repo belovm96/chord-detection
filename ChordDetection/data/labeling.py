@@ -155,8 +155,7 @@ path_to_ann = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/McGill-Billbo
 
 for folder in os.listdir(path_to_ann):
     files = os.listdir(path_to_ann+'/'+folder)
-    if len(files) > 1:
-        for file in files:
-            if file == 'full.lab':
-                anns = annot_obj(path_to_ann+'/'+folder+'/'+file)
-                np.save(path_to_ann+'/'+folder+'/'+'target.npy', anns, allow_pickle=True)
+    for file in files:
+        if file == 'full.lab':
+            anns = annot_obj(path_to_ann+'/'+folder+'/'+file)
+            np.save(path_to_ann+'/'+folder+'/'+'target.npy', anns, allow_pickle=True)

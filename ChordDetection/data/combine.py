@@ -11,8 +11,7 @@ new_dir = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/mcGill-billboard-
 
 for folder in os.listdir(ds_path):
     files = os.listdir(ds_path+folder)
-    if len(files) > 1:
-        os.mkdir(new_dir+folder)
-        for file in files:
-            if file[-4:] == '.npy':
-                shutil.copy(ds_path+folder+'/'+file, new_dir+folder+'/'+file)
+    os.mkdir(new_dir+folder)
+    for file in files:
+        if file[-4:] == '.npy':
+            shutil.copy(ds_path+folder+'/'+file, new_dir+folder+'/'+file)

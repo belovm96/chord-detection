@@ -46,8 +46,8 @@ class Batch:
                 random.shuffle(folders)
             for folder in folders:
                 files = os.listdir(self.path_to_data+folder)
-                spec = np.load(self.path_to_data+folder+'/'+files[0])
-                target = np.load(self.path_to_data+folder+'/'+files[1])
+                spec = np.load(self.path_to_data+folder+'/'+'spec.npy')
+                target = np.load(self.path_to_data+folder+'/'+'target.npy')
                 if self.context_size:
                     for i in range(spec.shape[0] - num_frames):
                         spect = spec[i:num_frames+i, :]

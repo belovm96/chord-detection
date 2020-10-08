@@ -147,22 +147,18 @@ class Batch:
                 rand_int = np.random.randint(2, size=1)
                 if rand_int == 0:
                     batch = self.detune(batch, self.batch_size)
+                    data_batch = np.array(batch[0])
+                    targets = np.array(batch[1])
+                    data_batch = np.reshape(data_batch, (self.batch_size, 1, data_batch.shape[1], data_batch.shape[2]))
                 else:
-                    batch = self.shift_sem(batch, self.batch_size)
-
-                data_batch = np.array(batch[0])
-                targets = np.array(batch[1])
-                data_batch = np.reshape(data_batch, (self.batch_size, 1, data_batch.shape[1], data_batch.shape[2]))
-
-            else:
-                data_batch = np.zeros((self.batch_size, 1, 105, 15))
-                targets = np.zeros((self.batch_size, 25))
-                i = 0
-                for data, target in batch:
-                    data = data.transpose()
-                    data_batch[i, 0, :, :] = data
-                    targets[i, :] = target
-                    i += 1
+                    data_batch = np.zeros((self.batch_size, 1, 105, 15))
+                    targets = np.zeros((self.batch_size, 25))
+                    i = 0
+                    for data, target in batch:
+                        data = data.transpose()
+                        data_batch[i, 0, :, :] = data
+                        targets[i, :] = target
+                        i += 1
             yield data_batch, targets
 
     def val_generator(self):

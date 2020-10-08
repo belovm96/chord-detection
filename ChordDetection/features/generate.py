@@ -38,10 +38,9 @@ log_obj = LogFiltSpec(8192, 24, 65, 2100, 10, True)
 ds_path = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/McGill-Billboard'
 for folder in os.listdir(ds_path):
     files = os.listdir(ds_path+'/'+folder)
-    if len(files) > 1:
-        for file in files:
-            if file[-4:] == '.wav':
-                spec = log_obj(ds_path+'/'+folder+'/'+file)
-                spec_np = np.array(spec)
-                np.save(ds_path+'/'+folder+'/'+'spec.npy', spec_np, allow_pickle=True)
+    for file in files:
+        if file[-3:] == 'wav':
+            spec = log_obj(ds_path+'/'+folder+'/'+file)
+            spec_np = np.array(spec)
+            np.save(ds_path+'/'+folder+'/'+'spec.npy', spec_np, allow_pickle=True)
     

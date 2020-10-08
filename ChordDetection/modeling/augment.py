@@ -9,9 +9,6 @@ import random
 
 
 def one_hot(class_ids, num_classes):
-    """
-    Create one-hot encoding of class ids
-    """
     class_ids = class_ids.astype(int)
     oh = np.zeros((len(class_ids), num_classes), dtype=np.float32)
     oh[np.arange(len(class_ids)), class_ids] = 1

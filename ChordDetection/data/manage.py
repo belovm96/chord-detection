@@ -1,5 +1,6 @@
 """
-Data Format Conversion and Annotation Matching Script
+Audio data management script
+
 @belovm96
 """
 import os
@@ -33,17 +34,17 @@ class DataWrangling:
         wav_name = file_name[:-4]+'.wav'
         os.system(f'ffmpeg -i {mp3_path} {to_save_path}/{wav_name}')
         
-     def manage_anns(self, song_list, song_anns_dir, save_songs_path):
-        for dir in os.listdir(song_anns_dir):
-            file_to_open = os.listdir(song_anns_dir+'/'+dir)
-            chord_f = open(song_anns_dir+'/'+dir+'/'+file_to_open[0], 'r')
-            art_title = chord_f.readlines()[:2]
-            title = art_title[0][9:-1].strip().lower().replace('\'','')
-            artist = art_title[1][10:].strip().lower().replace('\'','')
-            art_title = artist+' '+title
+     def manage_anns(self, songs_dir, song_list, save_songs_path, anns):
+        anns_path = open(anns, 'r')
+        anns_path = anns_path.readlines()
+        
+        song_list = open(song_list, 'r')
+        for c, song in enumerate(song_list.readlines()):
+            art_title = song[:-1]
+            art_title = art_title.strip()
             max_match = float('-inf')
             max_match_song =''
-            for song in song_list:
+            for song in songs_dir:
                 num_match = 0
                 for i, char in enumerate(song):
                     if i < len(art_title) and art_title[i] == char:
@@ -53,13 +54,15 @@ class DataWrangling:
                         max_match_song = song
                         
             if max_match >= len(art_title) - 5:
-                shutil.copy(song_list[max_match_song], save_songs_path+'/'+dir)
-                        
-       
-path_rename = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/download/billboard_mp3'
-path_renamed = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/download/billboard_mp3_renamed'
+                print(art_title)
+                os.mkdir(save_songs_path+art_title)
+                shutil.copy(songs_dir[max_match_song], save_songs_path+art_title)
+                shutil.copy(anns_path[c][:-1], save_songs_path+art_title)
+
+path_rename = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/rw-mp3'
+path_renamed = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/rw-mp3-renamed'
 path_convert_from = path_renamed
-path_convert_to = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/download/billboard_wav_renamed'
+path_convert_to = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/rw-wav-renamed'
 
 dr_obj = DataWrangling(path_rename, path_renamed, path_convert_to, path_convert_from)
 
@@ -69,16 +72,18 @@ for song in os.listdir(path_rename):
 for song in os.listdir(path_convert_from):
     dr_obj.mp3_to_wav(path_convert_from+'/'+song, path_convert_to)
 
+path_convert_to = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/dataset/audio_data/more-data-wav-renamed'
 songs_prep = {}
 for i, song in enumerate(os.listdir(path_convert_to)):
     song_sliced = song.split('_')
-    song_sliced = [word for word in song_sliced if word != '' ]
-    song_sliced = ' '.join(song_sliced)[:-4].lower().replace('\'','')
+    song_sliced = [word for word in song_sliced if word != '']
+    song_sliced = ' '.join(song_sliced).lower().replace('\'','')
+    song_sliced = song_sliced[:-4]
     songs_prep[song_sliced] = path_convert_to+'/'+song
 
-song_anns_path = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/billboard-2.0-salami_chords.tar/McGill-Billboard'
-save_songs_path = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/McGill-Billboard'
-dr_obj.manage_anns(songs_prep, song_anns_path, save_songs_path)
+song_anns_path = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/songs.txt'
+save_songs_path = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/dataset/preprocessed/'
+anns = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/songs_path.txt'
+dr_obj.manage_anns(songs_prep, song_anns_path, save_songs_path, anns)
 
-   
 

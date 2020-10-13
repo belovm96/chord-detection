@@ -6,7 +6,7 @@ Please install packages/libraries mentioned in requirements.txt file
 
 ## Usage
 * Docker App:
-    1. 
+    1.
 
 
 

@@ -37,12 +37,6 @@ model.load_weights(load_from)
 
 test_generator = batch_obj.test_generator_seq()
 
-spec_batch = np.zeros((1, SEQ_FRAMES, FEATURE_DIM))
-target_batch = np.zeros((1, SEQ_FRAMES))
-spec = np.load('/home/ubuntu/mcgill-billboard-test/1012'+'/'+'features.npy')
-target = np.load('/home/ubuntu/mcgill-billboard-test/1012'+'/'+'targets_seq.npy')
-spec_batch[0, :, :] = spec
-target_batch[0, :] = target
-pred = model.predict(spec_batch, verbose=1)
+history = model.evaluate(test_generator, verbose=1, steps=160000)
 
-print(pred.shape)
+print(history)

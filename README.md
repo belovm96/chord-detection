@@ -4,9 +4,9 @@ A Tool for Chord Sequence Detection in an audio track
 ## Requirements
 Please install packages/libraries mentioned in requirements.txt file
 
-## Usage
+## Use Cases
 * Docker App:
-            1.
+1. 
 
 
 

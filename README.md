@@ -5,11 +5,11 @@ A Tool for Chord Sequence Detection
 Please install packages/libraries mentioned in requirements.txt file
 If you would like to use ReChord App, you will need Docker and Streamlit:
 * Docker installation instructions [here](https://docs.docker.com/get-docker/)
-* Streamlit installation instructions [here]((https://docs.docker.com/get-docker/)
+* Streamlit installation instructions [here](https://docs.streamlit.io/en/stable/installation.html)
 
 
 ## Use Cases
-* Docker App (Docker installation instructions [here](https://docs.docker.com/get-docker/))
+* Docker App
   * Clone this repository
   * Go to this repo's root directory
   * From the root directory cd to ChordDetection-->app

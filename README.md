@@ -5,7 +5,7 @@ A Tool for Chord Sequence Detection in an audio track
 Please install packages/libraries mentioned in requirements.txt file
 
 ## Use Cases
-* Docker App (To install Docker follow instructions [here](https://docs.docker.com/get-docker/))
+* Docker App (Docker installation instructions [here](https://docs.docker.com/get-docker/)):
   * Clone this repository
   * Go to this repo's root directory
   * From the root directory cd to ChordDetection-->app

@@ -2,7 +2,9 @@
 A Tool for Chord Sequence Detection
 
 ## Requirements
-Please install packages/libraries mentioned in requirements.txt file
+Please install packages mentioned in requirements.txt file.
+
+
 If you would like to use ReChord App, you will need Docker and Streamlit:
 * Docker installation instructions [here](https://docs.docker.com/get-docker/)
 * Streamlit installation instructions [here](https://docs.streamlit.io/en/stable/installation.html)

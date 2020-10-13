@@ -13,6 +13,9 @@ Please install packages/libraries mentioned in requirements.txt file
   * To run docker image use *docker container run --gpus all -p 8501:8501 streamlit:app*
 * Command Line Tool
 
+## Tools
+Packages/Libraries: 
+
 
 
 

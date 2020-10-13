@@ -15,7 +15,18 @@ Please install packages/libraries mentioned in requirements.txt file
 
 ## Tools
 Packages/Libraries: 
-
+* ffmpeg
+* spotdl
+* tensorflow
+* numpy
+* seaborn
+* streamlit
+* matplotlib
+* pydub
+* tf2crf
+* keras
+* madmom
+* docker
 
 
 

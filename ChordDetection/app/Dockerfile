@@ -1,16 +1,10 @@
-FROM nvidia/cuda:10.1-base
-CMD nvidia-smi
-
-RUN apt-get update
-RUN apt-get upgrade -y
+# base image
+FROM tensorflow/tensorflow:latest-gpu
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 RUN apt-get install ffmpeg -y
-
-RUN apt-get install python3 -y
-RUN apt install python3-dev python3-pip python3-venv -y
 
 # exposing default port for streamlit
 EXPOSE 8501

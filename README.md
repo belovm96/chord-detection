@@ -1,2 +1,2 @@
-# chord-detection
-Repo for Chord Detection App
+# Music Chord Detection
+

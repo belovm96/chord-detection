@@ -1,0 +1,12 @@
+tensorflow==2.3.1
+spotdl
+cython
+numpy==1.18.5
+seaborn==0.10.0
+streamlit==0.67.1
+matplotlib==3.1.3
+pydub==0.24.1
+tf2crf==0.1.19
+keras==2.4.3
+sklearn
+madmom==0.16.1

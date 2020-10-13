@@ -16,8 +16,8 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
   * Clone this repository
   * Go to this repo's root directory
   * From the root directory *cd ChordDetection/app*
-  * To create docker image run *docker image build -t streamlit:app .*
-  * To run docker image use *docker container run -p 8501:8501 streamlit:app*
+  * To create docker image - *docker image build -t streamlit:app .*
+  * To run docker image - *docker container run -p 8501:8501 streamlit:app*
 ### Command Line Tool
 
 ## Tools

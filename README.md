@@ -10,7 +10,7 @@ Please install packages/libraries mentioned in requirements.txt file
   * Go to this repo's root directory
   * From the root directory cd to ChordDetection-->app
   * To create docker image run *docker image build -t streamlit:app .*
-  * Finally, to run docker image use docker container run --gpus all -p 8501:8501 streamlit:app
+  * To run docker image use *docker container run --gpus all -p 8501:8501 streamlit:app*
 * Command Line Tool
 
 

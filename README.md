@@ -6,9 +6,9 @@ Please install packages listed in requirements.txt file.
 
 
 If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpeg:
-* Docker installation instructions are [here](https://docs.docker.com/get-docker/)
-* Streamlit installation instructions are [here](https://docs.streamlit.io/en/stable/installation.html)
-* FFmpeg installation instructions are [here](https://ffmpeg.org/download.html)
+* [Docker](https://docs.docker.com/get-docker/)
+* [Streamlit](https://docs.streamlit.io/en/stable/installation.html)
+* [FFmpeg](https://ffmpeg.org/download.html)
 
 
 ## Use Cases

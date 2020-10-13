@@ -21,18 +21,17 @@ If you would like to use ReChord App, you will need Docker and Streamlit:
 
 ## Tools
 Packages & Tools used for development: 
+* docker
+* streamlit
 * ffmpeg
 * spotdl
 * tensorflow
 * numpy
 * seaborn
-* streamlit
 * matplotlib
 * pydub
 * tf2crf
 * keras
 * madmom
-* docker
-
 
 

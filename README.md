@@ -16,7 +16,7 @@ If you would like to use ReChord App, you will need Docker and Streamlit:
   * Go to this repo's root directory
   * From the root directory cd to ChordDetection-->app
   * To create docker image run *docker image build -t streamlit:app .*
-  * To run docker image use *docker container run --gpus all -p 8501:8501 streamlit:app*
+  * To run docker image use *docker container run -p 8501:8501 streamlit:app*
 * Command Line Tool
 
 ## Tools

@@ -20,7 +20,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
   * Create docker image - *docker image build -t streamlit:app .*
   * Run docker image - *docker container run --gpus all -p 8501:8501 streamlit:app*
   
- Note: ReChord App requires GPU on your machine!
+ Note: Dockerized ReChord App requires GPU on your machine!
 ### Command Line Tool
   * Needs to be finished...
 

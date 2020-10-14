@@ -31,12 +31,12 @@ Packages & Tools used for development:
 * FFmpeg
 * Spotdl
 * Tensorflow
+* Keras
+* Tf2crf
 * NumPy
 * Seaborn
 * Matplotlib
 * Pydub
-* Tf2crf
-* Keras
 * Madmom
 
 

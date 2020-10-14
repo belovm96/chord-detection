@@ -1,6 +1,10 @@
 # Music Chord Detection
 A Tool for Chord Sequence Detection
 
+## Motivation
+Musical community has been in need of a chord trascription software for some time, and I decided to use my skills in Software Development, Signal Processing. Music Theory, and AI to automate this.
+I would like to give credit to Filip Korzeniowski whose [research paper](https://arxiv.org/pdf/1612.05082.pdf) was implemented and integrated into this application.
+
 ## Requirements
 Please install packages listed in requirements.txt file.
 

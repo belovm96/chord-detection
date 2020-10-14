@@ -13,7 +13,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
 
 ## Use Cases
 ### Docker App
-Note: Dockerized ReChord App requires GPU on your machine!
+Note: Dockerized ReChord App requires GPU on your machine and assumes you are running on Ubuntu 18.04!
   * Clone this repository
   * Go to this repo's root directory
   * From this repo's root directory *cd ChordDetection/app*

@@ -22,7 +22,7 @@ Note: Dockerized ReChord App requires GPU on your machine and assumes you are ru
   * Run docker image - *docker container run --gpus all -p 8501:8501 streamlit:app*
   
 ### Command Line Tool
-  * Needs to be finished...
+  * Coming soon...
 
 ## Tools
 Packages & Tools used for development: 

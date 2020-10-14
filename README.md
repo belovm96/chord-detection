@@ -19,6 +19,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
   * Pull [this](https://hub.docker.com/layers/tensorflow/tensorflow/latest-gpu/images/sha256-37c7db66cc96481ac1ec43af2856ef65d3e664fd7f5df6b5e54855149f7f8594?context=explore) docker image - *docker pull tensorflow/tensorflow:latest-gpu*
   * Create docker image - *docker image build -t streamlit:app .*
   * Run docker image - *docker container run --gpus all -p 8501:8501 streamlit:app*
+  
  Note: ReChord App requires GPU on your machine!
 ### Command Line Tool
   * Needs to be finished...

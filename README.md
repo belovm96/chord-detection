@@ -36,7 +36,6 @@ Packages & Tools used for development:
 * NumPy
 * Seaborn
 * Matplotlib
-* Pydub
 * Madmom
 
 

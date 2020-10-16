@@ -4,8 +4,6 @@ A Tool for Chord Sequence Detection
 ## Motivation
 Musical community has been in need of a chord trascription software for some time. In this project, I bring my skills in Software Development, AI, Signal Processing, and Music Theory to automate music chord transcription.
 
-I would like to give credit to Filip Korzeniowski whose [research paper](https://arxiv.org/pdf/1612.05082.pdf) was implemented and integrated into this application.
-
 More about this project:<br/>[Slides](https://docs.google.com/presentation/d/14M2gyLT41rfnpafnfzjeqVfVyiiaQKW5gx3dN0QmwBE/edit#slide=id.p)
 
 ## Requirements
@@ -44,5 +42,8 @@ Packages & Tools used for development:
 * Seaborn
 * Matplotlib
 * Madmom
+
+## Acknowledgements
+I would like to give credit to Filip Korzeniowski whose [research paper](https://arxiv.org/pdf/1612.05082.pdf) was implemented and integrated into this application.
 
 

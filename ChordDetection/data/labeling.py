@@ -5,8 +5,8 @@ Credit to @fdlm's targets.py which I used as a skeleton code for this script
 """
 
 import numpy as np
-import string
 import os
+import argparse
 
 def one_hot(class_ids, num_classes):
     """
@@ -19,6 +19,14 @@ def one_hot(class_ids, num_classes):
     assert (oh.sum(axis=1) == 1).all()
 
     return oh
+
+def vectorize_anns(ANN, ann_path, save_path):
+    for folder in os.listdir(ann_path):
+        files = os.listdir(ann_path+'/'+folder)
+        for file in files:
+            if file[-3:] == 'lab' or file[-6:] == 'chords':
+                anns = ANN(ann_path+'/'+folder+'/'+file)
+                np.save(save_path+'/'+folder+'/'+'target.npy', anns, allow_pickle=True)
 
 class IntervalAnnotationTarget:
     def __init__(self, fps, num_classes):
@@ -72,11 +80,6 @@ class IntervalAnnotationTarget:
         
         return targets[np.nonzero(target_per_frame)[1]].astype(np.float32)
         
-        
-    def write_chord_predictions(self, filename, predictions):
-        with open(filename, 'w') as f:
-            f.writelines(['{:.3f}\t{:.3f}\t{}\n'.format(*p)
-                          for p in self._targets_to_annotations(predictions)])
      
 
 class ChordsMajMin(IntervalAnnotationTarget):
@@ -118,44 +121,11 @@ class ChordsMajMin(IntervalAnnotationTarget):
         chord_type_shift = np.array([12 if 'min' in chord_t or 'dim' in chord_t else 0 for chord_t in chord_type])
         return one_hot(chord_root_note_ids + chord_type_shift, self.num_classes)
     
-    
-    def _targets_to_annotations(self, targets):
-        natural = zip([0, 2, 3, 5, 7, 8, 10], string.uppercase[:7])
-        sharp = map(lambda v: ((v[0] + 1) % 12, v[1] + '#'), natural)
+parser = argparse.ArgumentParser(description = "Script for vectorization of chord annotations")
+parser.add_argument("--ann", type=str, help="path to annotations")
+parser.add_argument("--save_to", type=str, help='path to store vectorized annotations') 
+args = parser.parse_args()    
 
-        semitone_to_label = dict(sharp + natural)
+ANN = ChordsMajMin(10)
 
-        def pred_to_label(pred):
-            if pred == 24:
-                return 'N'
-            return '{}:{}'.format(semitone_to_label[pred % 12],
-                                  'maj' if pred < 12 else 'min')
-
-        spf = 1. / self.fps
-        labels = [(i * spf, pred_to_label(p)) for i, p in enumerate(targets)]
-
-        # join same consequtive predictions
-        prev_label = (None, None)
-        uniq_labels = []
-
-        for label in labels:
-            if label[1] != prev_label[1]:
-                uniq_labels.append(label)
-                prev_label = label
-
-        # end time of last label is one frame duration after
-        # the last prediction time
-        start_times, chord_labels = zip(*uniq_labels)
-        end_times = start_times[1:] + (labels[-1][0] + spf,)
-
-        return zip(start_times, end_times, chord_labels)
-    
-annot_obj = ChordsMajMin(10)
-path_to_ann = 'C:/Users/Mikhail/OneDrive/Desktop/chord-recognition/McGill-Billboard'
-
-for folder in os.listdir(path_to_ann):
-    files = os.listdir(path_to_ann+'/'+folder)
-    for file in files:
-        if file == 'full.lab':
-            anns = annot_obj(path_to_ann+'/'+folder+'/'+file)
-            np.save(path_to_ann+'/'+folder+'/'+'target.npy', anns, allow_pickle=True)
+vectorize_anns(args.ann, args.save_to)

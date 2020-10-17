@@ -128,4 +128,4 @@ args = parser.parse_args()
 
 ANN = ChordsMajMin(10)
 
-vectorize_anns(args.ann, args.save_to)
+vectorize_anns(ANN, args.ann, args.save_to)

@@ -18,7 +18,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
 
 
 ## Use Cases
-### Docker App
+### Web Application
 Note: Dockerized ReChord Streamlit App requires GPU on your machine!
   * Clone this repository
   * Go to this repo's root directory

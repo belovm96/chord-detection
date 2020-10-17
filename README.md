@@ -4,7 +4,7 @@ A Tool for Chord Sequence Detection
 ## Motivation
 Musical community has been in need of a chord trascription software for some time. In this project, I bring my skills in Software Development, Deep Learning, Signal Processing, and Music Theory to automate music chord transcription.
 
-More about this project:[Slides](https://docs.google.com/presentation/d/14M2gyLT41rfnpafnfzjeqVfVyiiaQKW5gx3dN0QmwBE/edit#slide=id.p)
+More about this project: [Slides](https://docs.google.com/presentation/d/14M2gyLT41rfnpafnfzjeqVfVyiiaQKW5gx3dN0QmwBE/edit#slide=id.p)
 &nbsp;[Demo](https://drive.google.com/file/d/1uvhqbAUlB80Brls5BFPFogwyL811ilBw/view?usp=sharing)
 
 ## Requirements

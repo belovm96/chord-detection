@@ -19,47 +19,63 @@ class DownloadAudio:
     def make_song_list(self):
         if self.dataset == 'McGill-Billboard':
             artist_title = []
+            paths = []
             for dir in os.listdir(self.path_to_anns):
                 files = os.listdir(f'{self.path_to_anns}/{dir}')
                 chord_f = open(f'{self.path_to_anns}/{dir}/{files[0]}', 'r')
                 art_title = chord_f.readlines()[:2]
                 title = art_title[0][9:-1].lower()
-                artist = art_title[1][10:].lower()
-                artist_title.append(title+' '+artist)
+                artist = art_title[1][10:-1].lower()
+                artist_title.append(artist+' '+title+'\n')
+                paths.append(f'{self.path_to_anns}/{dir}/{files[0]}\n')
                 chord_f.close()
                 
             song_lst = open(f'{self.song_l_path}/songs_billboard.txt', 'w')
+            path_lst = open(f'{self.song_l_path}/songs_billboard_paths.txt', 'w')
             song_lst.writelines(artist_title)
+            path_lst.writelines(paths)
             song_lst.close()
+            path_lst.close()
 
         elif self.dataset == 'RW':
             songs = []
+            paths = []
             for ann in os.listdir(self.path_to_anns):
+                paths.append(self.path_to_anns+'/'+ann+'\n')
                 ann = ann.split('-')
                 artist = ann[0][:-5].replace('_', ' ').lower().strip()
                 title = ann[2][:-7].replace('_', ' ').lower().strip()
-                songs.append(title+' '+artist)
+                songs.append(artist+' '+title+'\n')
 
             song_lst = open(f'{self.song_l_path}/songs_rw.txt', 'w')
-            for song in songs: 
-                song_lst.write(song+'\n')
+            path_lst = open(f'{self.song_l_path}/songs_rw_paths.txt', 'w')
+            path_lst.writelines(paths)
+            song_lst.writelines(songs)
             song_lst.close()
+            path_lst.close()
 
         elif self.dataset == 'USPop':
             us_pop = open(self.path_to_anns, 'r')
+            path_to_anns = self.path_to_anns.split('\\')
+            path_to_anns = '/'.join(path_to_anns[:-1])    
             songs = []
+            paths = []
             for path in us_pop.readlines():
+                save = path[1:]
                 path = path.split('/')
                 artist = path[2].replace('_', ' ').strip().lower()
                 title = path[4][3:-5].replace('_', ' ').strip().lower()
-                songs.append(artist+' '+title)
+                songs.append(artist+' '+title+'\n')
+                paths.append(path_to_anns+save)
 
             us_pop.close()
 
             song_lst = open(f'{self.song_l_path}/songs_uspop.txt', 'w')
-            for song in songs: 
-                song_lst.write(song+'\n')
+            path_lst = open(f'{self.song_l_path}/songs_uspop_paths.txt', 'w')
+            path_lst.writelines(paths)
+            song_lst.writelines(songs)
             song_lst.close()
+            path_lst.close()
 
         elif self.dataset == 'Isophonics':
             artist_title = []

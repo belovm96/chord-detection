@@ -1,3 +1,4 @@
+(https://img.shields.io/badge/Insight-Artificial%20Intelligence-lightgrey)
 # Music Chord Detection
 A Tool for Chord Sequence Detection
 

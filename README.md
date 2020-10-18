@@ -10,7 +10,7 @@ Learn more: [Slides](https://docs.google.com/presentation/d/14M2gyLT41rfnpafnfzj
 [Demo](https://drive.google.com/file/d/1uvhqbAUlB80Brls5BFPFogwyL811ilBw/view?usp=sharing)
 
 ## Requirements
-Please install required packages:
+Please install dependencies:
 * Clone the repo with `git clone https://github.com/belovm96/chord-detection`
 * From the repo's root directory run `pip3 install -r requirements.txt`
 

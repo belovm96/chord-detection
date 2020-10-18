@@ -12,7 +12,7 @@ Learn more: [Slides](https://docs.google.com/presentation/d/14M2gyLT41rfnpafnfzj
 ## Requirements
 Please install required packages:
 * Clone the repo with `git clone https://github.com/belovm96/chord-detection`
-* From the repo's root directory run *pip3 install -r requirements.txt
+* From the repo's root directory run `pip3 install -r requirements.txt`
 
 
 If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpeg:
@@ -26,10 +26,10 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
 Note: Dockerized ReChord Streamlit App requires GPU on your machine!
   * Clone this repository
   * Go to this repo's root directory
-  * From this repo's root directory '''cd ChordDetection/app'''
-  * Pull [this](https://hub.docker.com/layers/tensorflow/tensorflow/latest-gpu/images/sha256-37c7db66cc96481ac1ec43af2856ef65d3e664fd7f5df6b5e54855149f7f8594?context=explore) docker image - *docker pull tensorflow/tensorflow:latest-gpu*
-  * Create docker image - *docker image build -t streamlit:app .*
-  * Run docker image - *docker container run --gpus all -p 8501:8501 streamlit:app*
+  * From this repo's root directory `cd ChordDetection/app`
+  * Pull [this](https://hub.docker.com/layers/tensorflow/tensorflow/latest-gpu/images/sha256-37c7db66cc96481ac1ec43af2856ef65d3e664fd7f5df6b5e54855149f7f8594?context=explore) docker image - `docker pull tensorflow/tensorflow:latest-gpu`
+  * Create docker image - `docker image build -t streamlit:app . `
+  * Run docker image - `docker container run --gpus all -p 8501:8501 streamlit:app`
   
 ### Command Line Tool
   * Coming soon...

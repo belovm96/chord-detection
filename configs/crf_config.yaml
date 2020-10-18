@@ -1,0 +1,35 @@
+# ------------------------------------------------- Dataset -------------------------------------------------
+
+train_path: /home/ubuntu/data_train/
+val_path: /home/ubuntu/data_val/
+test_path: /home/ubuntu/data_test/
+
+augment: True
+randomise: True
+
+# -------------------------------------- Training Hyperparams - CRF --------------------------------------
+
+batch_size: 30
+context_w: 7
+epochs: 50
+
+num_classes: 25
+seq_frames: 1024
+feature_dim: 128
+
+val_size: 80
+train_size: 740
+test_size: 80
+
+lr_scheduler:
+    init: 0.01
+    final: 0.000001
+    step: 0.1
+    patience: 3
+
+reg: 
+    L2: 0.001
+    L1: 0.001
+
+save_best_weights: /home/ubuntu/rechord/chord-detection/ChordDetection/modeling/models/crf/exp_2/crf_02
+save_log: /home/ubuntu/rechord/chord-detection/ChordDetection/modeling/models/crf/exp_2/training.log

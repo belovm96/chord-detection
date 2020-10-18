@@ -115,13 +115,41 @@ class AudioCNN:
                         steps_per_epoch=self.steps_per_epoch,
                         epochs=self.epochs, verbose=True, 
                         )
+
         def test_model(self):
                 self.model.load_weights(self.weights)
                 history = self.model.evaluate(self.test_generator, verbose=1, steps=self.test_num)
                 print(history)
 
+        def make_extractor(self):
+                self.model.load_weights(self.weights)
+                
+                model_ext = models.Sequential()
+                for layer in self.model.layers[:-5]:
+                        model_ext.add(layer)
 
-parser = argparse.ArgumentParser(description = "Script for training and testing of the CNN")
+                model_ext.add(layers.AveragePooling2D((13, 3), data_format='channels_first', trainable=False))
+
+                for i in range(len(model_ext.layers[:-1])):
+                        weights = self.model.layers[i].get_weights()
+                        model_ext.layers[i].set_weights(weights)
+                        model_ext.layers[i].trainable = False
+
+                weights = self.model.layers[-3].get_weights()
+                model_ext.layers[-1].set_weights(weights)
+                model_ext.layers[-1].trainable = False
+                model_ext.add(layers.Flatten(trainable=False))
+
+                model_ext.compile(optimizer='adam',
+                        loss=tf.keras.losses.CategoricalCrossentropy(from_logits=False),
+                        metrics=['accuracy'])
+
+                model_ext.save('./cnn_extractor.h5')
+
+
+
+
+parser = argparse.ArgumentParser(description="Script for training and testing of the CNN")
 parser.add_argument("--path_config", type=str, help="path to config file")
 args = parser.parse_args()
 
@@ -138,4 +166,4 @@ CNN.summary()
 CNN.callbacks()
 CNN.build_generators()
 
-CNN.fit_model()
+CNN.make_extractor()

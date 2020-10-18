@@ -10,7 +10,9 @@ Learn more: [Slides](https://docs.google.com/presentation/d/14M2gyLT41rfnpafnfzj
 [Demo](https://drive.google.com/file/d/1uvhqbAUlB80Brls5BFPFogwyL811ilBw/view?usp=sharing)
 
 ## Requirements
-Please install required packages - *pip3 install -r requirements.txt*
+Please install required packages:
+* Clone the repo with **git clone https://github.com/belovm96/chord-detection**
+* From the repo's root directory run **pip3 install -r requirements.txt**
 
 
 If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpeg:

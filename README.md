@@ -1,4 +1,5 @@
 [![GitHub license](https://img.shields.io/github/license/belovm96/chord-detection)](https://github.com/belovm96/chord-detection/blob/master/LICENSE)
+[![Generic badge](https://img.shields.io/badge/Insight-Artificial%20Intelligence-lightgrey)](https://shields.io/)
 # Music Chord Detection
 A Tool for Chord Sequence Detection
 

@@ -3,6 +3,7 @@
 # Also, please install ffmpeg. Follow instructions here - https://ffmpeg.org/download.html to download and install ffmpeg on your OS.
 
 sklearn
+pyyaml
 spotdl
 scipy>=0.16
 cython>=0.25

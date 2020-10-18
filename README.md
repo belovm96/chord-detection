@@ -49,7 +49,7 @@ Packages & Tools used for development:
 * Yaml
 
 ## Acknowledgements
-I would like to give credit to Filip Korzeniowski whose [research paper](https://arxiv.org/pdf/1612.05082.pdf) was implemented and integrated into this application. 
-<\br>Also, I would like to thank Insight Artificial Intelligence Program for presenting me with an opportunity to work on this project, their guidance and support.
+I would like to give credit to Filip Korzeniowski whose [research paper](https://arxiv.org/pdf/1612.05082.pdf) was implemented and integrated into this application. \
+Also, I would like to thank Insight Artificial Intelligence Program for presenting me with an opportunity to work on this project, their guidance and support.
 
 

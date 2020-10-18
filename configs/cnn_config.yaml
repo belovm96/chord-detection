@@ -1,0 +1,32 @@
+# ------------------------------------------------- Dataset -------------------------------------------------
+
+train_path: /home/ubuntu/data_train/
+val_path: /home/ubuntu/data_val/
+test_path: /home/ubuntu/data_test/
+
+augment: True
+randomise: True
+
+# -------------------------------------- Training Hyperparams - CNN --------------------------------------
+
+batch_size: 500
+context_w: 7
+epochs: 50
+drop_out: 0.5
+
+val_size: 140000
+train_size: 1400000
+test_size: 160000
+
+lr_scheduler:
+    init: 0.001
+    final: 0.000001
+    step: 0.1
+    patience: 3
+
+reg: 
+    L2: 0.00001
+    L1: 0.001
+
+save_best_weights: /home/ubuntu/rechord/chord-detection/ChordDetection/modeling/models/cnn/exp_2/cnn_02
+save_log: /home/ubuntu/rechord/chord-detection/ChordDetection/modeling/models/cnn/exp_2/training.log

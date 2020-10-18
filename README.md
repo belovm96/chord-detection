@@ -46,6 +46,7 @@ Packages & Tools used for development:
 * Seaborn
 * Matplotlib
 * Madmom
+* Yaml
 
 ## Acknowledgements
 I would like to give credit to Filip Korzeniowski whose [research paper](https://arxiv.org/pdf/1612.05082.pdf) was implemented and integrated into this application.

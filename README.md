@@ -10,7 +10,7 @@ While it is easy to find sheet music or tabs for old time classics, that is not 
 
 In this project, I aim to help musicians with chord transcription and introduce ReChord - web application that transcribes chords for you in just few minutes! 
 
-I utilized my skills in Software Development, Deep Learning, Signal Processing, and Music Theory to create the application, and hope that it proves useful for fellow musicians and music enthusiasts.
+I utilized my skills in Software Development, Deep Learning, Signal Processing, and Music Theory to create the application, and hope that it will prove to be useful for fellow musicians and music enthusiasts.
 
 Learn more: [Slides](https://docs.google.com/presentation/d/14M2gyLT41rfnpafnfzjeqVfVyiiaQKW5gx3dN0QmwBE/edit#slide=id.p)
 [Demo](https://drive.google.com/file/d/1uvhqbAUlB80Brls5BFPFogwyL811ilBw/view?usp=sharing)

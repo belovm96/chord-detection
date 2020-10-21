@@ -38,6 +38,9 @@ Note: Dockerized ReChord Streamlit App requires GPU on your machine!
   
 ### Command Line Tool
   * Coming soon...
+  
+## Approach
+
 
 ## Tools
 Packages & Tools used for development: 

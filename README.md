@@ -4,7 +4,7 @@
 A Tool for Chord Sequence Detection
 
 ##### Table of Contents  
-[Headers](#headers)  
+[Motivation](#Motivation)  
 [Emphasis](#emphasis)  
 ...snip...    
 <a name="headers"/>

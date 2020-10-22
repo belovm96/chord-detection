@@ -4,11 +4,10 @@
 A Tool for Chord Sequence Detection
 
 ##### Table of Contents  
-[Motivation](#Motivation)  
-[Emphasis](#emphasis)  
-...snip...    
-<a name="headers"/>
-## Headers
+* [Motivation](#Motivation)  
+* [Requirements](#Requirements)  
+* [Use Cases](#Use Cases)
+
 
 ## Motivation
 Chord Transcription is a skill of detecting chord progressions in a musical piece by ear. While the majority of musical instrument players use sheet music to learn songs, it is rare that a musician is trained enough to figure out a composition by ear alone. Moreover, chord transcription takes hours at times, especially for beginner musicians.

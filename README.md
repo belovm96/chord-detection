@@ -41,7 +41,7 @@ Note: Dockerized ReChord Streamlit App requires GPU on your machine!
   
 ## Approach
 My data --> model --> predictions pipeline can be summarized as follows:
-![Spec](/static/spec.png)
+![Spec](/static/pipeline.jpg)
 
 *First stage:* \
 I am using Short-time Fourier Transform to convert a raw audio signal into the spectrogram - Time - Frequency representation of the signal. Then, a filterbank with logarithmically spaced filters is applied to the spectrogram to scale the frequency values with the purpose of equalizing the frequency distance between each note in all areas of the spectrogram. Finally, logarithmic function is applied to the spectrogram values to compress the value range, and spectrogram is cut up into 0.1-second spectrogram frames in a sliding window fashion. These 0.1-second spectrogram frames are fed into the deep learning model for training/inference.

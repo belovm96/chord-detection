@@ -10,6 +10,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import os
 import shutil
+# SessionState script allows to preserve app state when page has to be refreshed to continue
 import SessionState
 from sklearn import preprocessing
 from pydub import AudioSegment
@@ -20,16 +21,19 @@ from tf2crf import CRF
 import warnings
 warnings.filterwarnings('ignore')
 
+# Adjusting parameters of matplotlib figure
 plt.rcParams.update({'font.size': 3.5, 'xtick.major.pad': 0, 
                      'ytick.major.pad': 5, 'axes.titlepad': 5,
                      'xtick.bottom': False, 'ytick.left': False})
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
+# Setting global network params
 SEQ_LEN = 1024
 NUM_CLASSES = 25
 FEAT_DIM = 128
 
+# Since tf2crf is a custom class, need to build the CRF model and load the weights (can not load the model directly)
 reg = tf.keras.regularizers.L2(1e-3)
 input = Input(shape=(SEQ_LEN, FEAT_DIM), dtype='float32')
 mid = Dense(NUM_CLASSES, input_shape=(SEQ_LEN, FEAT_DIM), activation='linear', kernel_regularizer=reg)(input)
@@ -47,12 +51,16 @@ load_from = './model_01'
 model.load_weights(load_from)
 
 crf = model
+# Loading FCNN feature extractor
 cnn = load_model('cnn_extractor.h5')
 
 CONTEXT_SIZE = 7
 NUM_FRAMES = 2 * CONTEXT_SIZE + 1
 
 def one_hot(class_ids, num_classes):
+    """
+    Creating one-hot representation from class labels
+    """
     class_ids = class_ids.astype('int32')
     oh = np.zeros((len(class_ids), num_classes), dtype=np.int32)
     oh[np.arange(len(class_ids)), class_ids] = 1
@@ -63,6 +71,9 @@ def one_hot(class_ids, num_classes):
     return oh
 
 def make_preds(song):
+    """
+    Making predictions based on the user input - the entire pipeline - extract features --> CRF --> estimated predictions --> one-hot predictions
+    """
     with st.spinner('Downloading the song. Please wait...'):
         os.system(f'spotdl --song {song} --overwrite skip')
         songs = [f for f in os.listdir('.') if os.path.isfile(f) and f[-3:] == 'mp3']
@@ -125,7 +136,7 @@ def make_preds(song):
             st.subheader('Sorry, can not annotate the song provided by the link. Please try again.')
             return False, None, None
                 
-
+# Building a chord to id mapping for plotting
 roots = ['A','B','C','D','E','F','G']
 natural = zip(roots, [0, 2, 3, 5, 7, 8, 10])
 note_map = {}
@@ -138,6 +149,7 @@ for chord, num in natural:
 
 note_map['N'] = 24
 
+# Reversing the mapping - map chord ids to chords, while sorting by chord id values first
 chords = {k: v for k, v in sorted(note_map.items(), key=lambda item: item[1])}
 
 st.title('ReChord')

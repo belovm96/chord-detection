@@ -6,18 +6,19 @@ import os
 import numpy as np
 import random
 from sklearn import preprocessing
-from augment import SemitoneShift, Detuning
+from augment import SemitoneShift, Detuning # TODO: change import path
 from keras.models import load_model
 import warnings
 warnings.filterwarnings('ignore')
 
 class Batch:
     def __init__(self, batch_size, context_size, path_to_train, path_to_test, path_to_val, augment=False, randomise=True):
-        self.model = load_model('/home/ubuntu/chord-detection/ChordDetection/modeling/cnn_extractor.h5')
+        self.model = load_model('/home/ubuntu/chord-detection/ChordDetection/modeling/cnn_extractor.h5') # TODO: update model path
         self.batch_size = batch_size
         self.context_size = context_size
         self.augment = augment
         if self.augment:
+            # Initializing data augmentation functions
             self.shift_sem = SemitoneShift(0.3, 2, 2)
             self.detune = Detuning(0.3, 0.4, 2)
         self.randomise = randomise
@@ -35,7 +36,8 @@ class Batch:
         else:
             self.path_to_data = self.path_to_test
             b_size = 1
-
+        
+        # Total number of frames per data point
         num_frames = 2 * self.context_size + 1
 
         batch = []
@@ -74,7 +76,8 @@ class Batch:
         else:
             self.path_to_data = self.path_to_test
             b_size = 1
-
+            
+        # TODO: put these params as arguments to Batch class
         num_frames = 2 * self.context_size + 1
         seq_frames = 1024
         feature_dim = 128
@@ -112,7 +115,7 @@ class Batch:
         for data, targets in self._generator_seq('val'):
             yield data, targets
 
-                    
+    # TODO: Simplify this function, i.e. do not use hard coded values for feature size               
     def train_generator(self):
         for batch in self._generator('train'):
             if self.augment:
@@ -132,7 +135,8 @@ class Batch:
                         targets[i, :] = target
                         i += 1
             yield data_batch, targets
-
+            
+    # TODO: Simplify this function, i.e. do not use shape method
     def val_generator(self):
         for batch in self._generator('val'):
             batch_scaled = np.zeros((1, 1, batch[0][0].shape[1], batch[0][0].shape[0]))
@@ -159,7 +163,8 @@ class Batch:
             self.path_to_data = self.path_to_val 
         else:
             self.path_to_data = self.path_to_test
-
+            
+        # TODO: Do not hard code these - put them as args to the function or class
         num_frames = 2 * self.context_size + 1
         seq_frames = 1024
         feature_dim = 128

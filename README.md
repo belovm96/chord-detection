@@ -40,7 +40,7 @@ Note: Dockerized ReChord Streamlit App requires GPU on your machine!
   * Coming soon...
   
 ## Approach
-My data --> model --> predictions pipeline can be summarized as follows:
+My data &#8594; model &#8594; predictions pipeline can be summarized as follows:
 ![audio](/static/pipeline.JPG)
 
 *First stage:* \

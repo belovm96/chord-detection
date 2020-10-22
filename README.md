@@ -56,7 +56,7 @@ Short-time Fourier Transform algorithm is used to convert raw audio signal into 
 ![modeling](/static/modeling.JPG)
 
 
-A Fully Convolutional Neural Network is trained on the log filtered spectrogram frames for chord prediction. However, these predictions are not used directly, since doing so ensures that the final chord sequence predictions are fragmented, which might confuse the end user of the application. Moreover, FCNN model does not exploit the fact that chords are always parts of chord progressions, i.e. sequences, losing its predictive power. Therefore, Conditional Random Fields are introduced into the deep learning architecture to smooth out chord sequence predictions and to capture frame-to-frame dependencies between the predictions at every time step. The features extracted by the CNN are the inputs to the CRF, and the final chord sequence predictions are obtained using Viterbi Decoding.
+A Fully Convolutional Neural Network is trained on the log filtered spectrogram frames for chord prediction. However, these predictions are not used directly, since doing so ensures that the final chord sequence predictions are fragmented, which might confuse the end user of the application. Moreover, FCNN model does not exploit the fact that chords are always parts of chord progressions, i.e. sequences, losing a part of the potential predictive power. Therefore, Conditional Random Fields are introduced into the deep learning architecture to smooth out chord sequence predictions and to capture frame-to-frame dependencies between the predictions at every time step. The features extracted by the CNN are the inputs to the CRF, and the final chord sequence predictions are obtained using Viterbi Decoding.
 
 ## Product Design
 ![product](/static/prod_des.JPG)

@@ -9,6 +9,9 @@ import random
 
 
 def one_hot(class_ids, num_classes):
+    """
+    Encoding a list of class labels into a one-hot representation
+    """
     class_ids = class_ids.astype(int)
     oh = np.zeros((len(class_ids), num_classes), dtype=np.float32)
     oh[np.arange(len(class_ids)), class_ids] = 1
@@ -20,6 +23,9 @@ def one_hot(class_ids, num_classes):
 
 
 class SemitoneShift:
+    """
+    Simulating a semitone shift - adjusting targets accordingly
+    """
     def __init__(self, p, max_shift, bins_per_semitone, target_type='chords_maj_min'):
         self.p = p
         self.max_shift = max_shift
@@ -31,6 +37,7 @@ class SemitoneShift:
             self.adapt_targets = self._adapt_targets_chroma
 
     def _adapt_targets_chords_maj_min(self, targets, shifts):
+        # TODO: target values roll over the boundary - need to fix this
         chord_classes = targets.argmax(-1)
         no_chord_class = targets.shape[-1] - 1
         no_chords = (chord_classes == no_chord_class)
@@ -71,6 +78,9 @@ class SemitoneShift:
 
 
 class Detuning:
+    """
+    Simulating detuning - at most half semitone shift - no need to adjust the targets
+    """
     def __init__(self, p, max_shift, bins_per_semitone):
         if max_shift >= 0.5:
             raise ValueError('Detuning only works up to half a semitone!')

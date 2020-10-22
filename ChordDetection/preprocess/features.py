@@ -19,6 +19,9 @@ def generate_specs(SPEC, songs_path, save_to):
     
 
 class LogFiltSpec:
+    """
+    Generated logarithmically filetered spectrograms - note distance equalization step
+    """
     def __init__(self, frame_size, num_bands, fmin, fmax, fps, unique_filters, sample_rate=44100, fold=None):
         self.frame_size = frame_size
         self.num_bands = num_bands

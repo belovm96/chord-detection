@@ -6,9 +6,9 @@ A Tool for Chord Sequence Detection
 ## Table of Contents  
 - [Motivation](#Motivation)  
 - [Requirements](#Requirements)  
-- [Use Cases](#Use_Cases)
-    - [Web Application](#Web_Application)
-    - [Command Line Tool](#Command_Line_Tool)
+- [Use Cases](#Use Cases)
+    - [Web Application](#Web Application)
+    - [Command Line Tool](#Command Line Tool)
 - [Approach](Approach)
     - [Preprocessing](#First_Stage_-_Preprocessing)
     - [Modeling](#Second_Stage_-_Modeling)

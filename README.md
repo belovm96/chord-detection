@@ -41,7 +41,7 @@ Note: Dockerized ReChord Streamlit App requires GPU on your machine!
   
 ## Approach
 My data --> model --> predictions pipeline can be summarized as follows:
-![audio](/static/audio_sig.jpg){:height="50%" width="50%"} 
+![audio](/static/audio_sig.jpg) <!-- .element height="50%" width="50%" -->
 
 
 ![log spec](/static/log_spec.JPG) 

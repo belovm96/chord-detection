@@ -9,7 +9,7 @@ A Tool for Chord Sequence Detection
 - [Use Cases](#use-cases)
     - [Web Application](#web-application)
     - [Command Line Tool](#command-line-tool)
-- [Approach](Approach)
+- [Approach](#Approach)
     - [Preprocessing](#First_Stage_-_Preprocessing)
     - [Modeling](#Second_Stage_-_Modeling)
 - [Product Design](#product-design)

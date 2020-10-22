@@ -3,11 +3,11 @@
 # Music Chord Detection
 A Tool for Chord Sequence Detection
 
-#### Table of Contents  
-* [Motivation](#Motivation)  
-* [Requirements](#Requirements)  
-* [Use Cases](#Use Cases)
-    * [Web Application](#Web Application)
+## Table of Contents  
+- [Motivation](#Motivation)  
+- [Requirements](#Requirements)  
+- [Use_Cases](#Use_Cases)
+    - [Web_Application](#Web_Application)
 
 
 ## Motivation

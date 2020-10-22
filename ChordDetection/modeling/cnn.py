@@ -122,6 +122,9 @@ class AudioCNN:
                 print(history)
 
         def make_extractor(self):
+                """
+                Creating and saving weights of FCNN extractor network whose outputs will be used as inputs to CRF
+                """
                 self.model.load_weights(self.weights)
                 
                 model_ext = models.Sequential()

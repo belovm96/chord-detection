@@ -12,6 +12,9 @@ class PreprocessFeatures:
         self.dir_aligned = dir_aligned
         
     def align(self):
+        """
+        Since features and targets do not align most of the time - aligning features and targets such that they are of equal shapes
+        """
         for folder in os.listdir(self.cur_dir):
             files = os.listdir(self.cur_dir+folder)
             features = np.load(self.cur_dir+folder+'/'+files[0], allow_pickle=True)

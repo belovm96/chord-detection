@@ -1,5 +1,5 @@
 """
-Extracts list of songs and download them
+Extracts lists of songs and downloads them
 For the script to run, please install spotdl
 @belovm96
 """
@@ -7,6 +7,9 @@ import os
 import argparse
 
 class DownloadAudio:
+    """
+    Class for downloading audio data
+    """
     def __init__(self, song_l_path, path_to_save_aud, path_to_anns, ds):
         self.dataset = ds
         self.song_l_path = song_l_path
@@ -17,6 +20,9 @@ class DownloadAudio:
         os.system(f'spotdl --list={self.song_l_path} --overwrite skip -f {self.path_to_save_aud}')  
 
     def make_song_list(self):
+        """
+        Iterating through files and saving song names and paths to songs in text files
+        """
         if self.dataset == 'McGill-Billboard':
             artist_title = []
             paths = []

@@ -15,6 +15,9 @@ class DataWrangling:
          self.name_to_path = {}
     
      def audio_rename(self):
+        """
+        Renaming songs since ffmpeg does not like whitespaces in song names...
+        """
         for song in os.listdir(self.path_rename):
             path = self.path_rename+'/'+song.split('/')
             file_name = path[-1]
@@ -30,6 +33,9 @@ class DataWrangling:
             shutil.copy(self.path_rename+'/'+song, self.renamed+'/'+song_name)
         
      def mp3_to_wav(self):
+        """
+        Converting mp3 files to wav format using ffmpeg
+        """
         for song in os.listdir(self.path_convert_from):
             path = self.path_convert_from+'/'+song.split('/')
             file_name = path[-1].strip()
@@ -37,6 +43,10 @@ class DataWrangling:
             os.system(f'ffmpeg -i {self.path_convert_from}/song {self.path_convert_to}/{wav_name}')
         
      def store(self, ann_paths, anns, save_files_to):
+        """
+        Looking for a corresponding chord annotation for each song
+        and saving them to a folder
+        """
         anns = open(anns, 'r')
         ann_paths = open(ann_paths, 'r')
         ann_paths = ann_paths.readlines()
@@ -61,6 +71,9 @@ class DataWrangling:
                 
                 
      def song_to_path(self):
+        """
+        Creating a song name --> song's path relations for future use in store function
+        """
         for i, song in enumerate(os.listdir(self.path_convert_to)):
             song_sliced = song.split('_')
             song_sliced = [word for word in song_sliced if word != '' ]

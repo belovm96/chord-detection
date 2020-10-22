@@ -45,10 +45,10 @@ My data &#8594; model &#8594; predictions pipeline can be summarized as follows:
 
 *First stage:* \
 I am using Short-time Fourier Transform to convert a raw audio signal into the spectrogram - Time - Frequency representation of the signal. Then, a filterbank with logarithmically spaced filters is applied to the spectrogram to scale the frequency values with the purpose of equalizing the frequency distance between each note in all areas of the spectrogram. Finally, logarithmic function is applied to the spectrogram values to compress the value range, and spectrogram is cut up into 0.1-second spectrogram frames in a sliding window fashion. These 0.1-second spectrogram frames are fed into the deep learning model for training/inference.
-
+![audio](/static/prep.JPG)
 *Second stage:* \
 A Fully Convolutional Neural Network is trained on the log filtered spectrogram frames for chord prediction. However, these predictions are not used directly, since doing so ensures that the final chord sequence predictions are fragmented, which might confuse the end user of the application and does not exploit the fact that chords are always parts of chord progressions, i.e. sequences. Therefore, Conditional Random Fields are introduced into the deep learning architecture to smooth out chord sequence predictions and to capture frame-to-frame dependencies between the predictions at every time step. The features extracted by the CNN are the inputs to the CRF, and the final chord sequence predictions are obtained using Viterbi Decoding.
-
+![modeling](/static/modeling.JPG)
 
 ## Tools
 Packages & Tools used for development: 

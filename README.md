@@ -6,8 +6,8 @@ A Tool for Chord Sequence Detection
 ## Table of Contents  
 - [Motivation](#Motivation)  
 - [Requirements](#Requirements)  
-- [Use_Cases](#Use Cases)
-    - [Web_Application](#Web Application)
+- [Use Cases](#Use_Cases)
+    - [Web Application](#Web_Application)
 
 
 ## Motivation

@@ -62,7 +62,7 @@ My data &#8594; model &#8594; predictions pipeline can be summarized as follows:
 ![audio](/static/prep.JPG)
 
 
-Short-time Fourier Transform algorithm is used to convert raw audio signal into the spectrogram - Time - Frequency representation of the signal. Then, a filterbank with logarithmically spaced filters is applied to the spectrogram to scale the frequency values with the purpose of equalizing the frequency distance between each note in all areas of the spectrogram. Finally, logarithmic function is applied to the spectrogram values to compress the value range, and spectrogram is cut up into 0.1-second spectrogram frames in a sliding window fashion. These 0.1-second spectrogram frames are fed into the deep learning model for training/inference.
+Short-time Fourier Transform algorithm is used to convert raw audio signal into the spectrogram - Time - Frequency representation of the signal. Then, a filterbank with logarithmically spaced filters is applied to the spectrogram to scale the frequency axis values with the purpose of equalizing the frequency distance between each note in all areas of the spectrogram. Finally, logarithmic function is applied to the spectrogram values to compress the value range, and spectrogram is cut up into 0.1-second spectrogram frames in a sliding window fashion. These 0.1-second spectrogram frames are fed into the deep learning model for training/inference.
 
 ### Second stage - Modeling
 

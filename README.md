@@ -33,6 +33,7 @@ Learn more: [Slides](https://docs.google.com/presentation/d/14M2gyLT41rfnpafnfzj
 Please install dependencies:
 * Clone the repo with `git clone https://github.com/belovm96/chord-detection`
 * From the repo's root directory run `pip3 install -r requirements.txt`
+* Python version 3.7 or higher
 
 
 If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpeg:
@@ -53,7 +54,7 @@ Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU
 ### Command Line Tool
   * Clone this repository
   * Put a song that you would like to transcribe in `data` folder of the repo's root directory
-  * To get chord transcriptions run `python transcribe.py ./data/{your song name}`
+  * To get chord transcriptions run `python transcribe.py ./data/song name`
     * If your song name has white spaces, please enclose it with quotes, e.g. `python transcribe.py ./data/'U2 - With Or Without You - Remastered.mp3'`
     * The script will ask you to provide time interval of the song that you would like to annotate
     * Chord - Time representations will be saved to `annotations` folder in `.png` format

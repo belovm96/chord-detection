@@ -154,7 +154,7 @@ class DetectChords:
         chart.set_xlabel('Seconds', fontsize=10)
 
         plt.tight_layout()
-        plt.savefig(f'{self.song_name}_Interval-{start//10}-{end//10}.png')
+        plt.savefig(f'./annotations/{self.song_name}_Interval-{start//10}-{end//10}.png')
         print('\nSaved predictions to the current working directory!')
 
 parser = argparse.ArgumentParser(description="Example script for chord sequence detection. \nNote: the script will do mp3 to wav conversion and store wav file in data!")

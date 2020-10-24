@@ -67,7 +67,9 @@ Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU
   
   
 ![example annotations](/annotations/U2%20-%20With%20or%20Without%20You_Interval-20-25.png)
-  
+<p align="center">
+  <img src="https://github.com/belovm96/chord-detection/blob/master/annotations/U2%20-%20With%20or%20Without%20You_Interval-20-25.png" />
+</p>
  
 
 ## Approach

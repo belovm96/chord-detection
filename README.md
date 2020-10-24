@@ -42,8 +42,8 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
 
 
 ## Use Cases
+Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU on your machine!
 ### Web Application
-Note: Dockerized ReChord Streamlit App requires GPU on your machine!
   * Clone this repository
   * From the repo's root directory `cd ChordDetection/app`
   * Pull [this](https://hub.docker.com/layers/tensorflow/tensorflow/latest-gpu/images/sha256-37c7db66cc96481ac1ec43af2856ef65d3e664fd7f5df6b5e54855149f7f8594?context=explore) docker image - `docker pull tensorflow/tensorflow:latest-gpu`
@@ -51,7 +51,12 @@ Note: Dockerized ReChord Streamlit App requires GPU on your machine!
   * Run docker image - `docker container run --gpus all -p 8501:8501 streamlit:app`
   
 ### Command Line Tool
-  * Coming soon...
+  * Clone this repository
+  * Put a song that you would like to transcribe in `data` folder of the repo's root directory
+  * To get chord transcriptions run `python transcribe.py ./data/{your song name}`
+    * If your song name has white spaces, please enclose it with quotes, e.g. `python transcribe.py ./data/'U2 - With Or Without You - Remastered.mp3'`
+    * The script will ask you to provide time interval of the song that you would like to annotate
+    * Chord - Time representations will be saved to `annotations` folder in `.png` format
   
 ## Approach
 My data &#8594; model &#8594; predictions pipeline can be summarized as follows:

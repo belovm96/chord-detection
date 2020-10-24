@@ -14,9 +14,10 @@ from tf2crf import CRF
 import warnings
 warnings.filterwarnings('ignore')
 
-plt.rcParams.update({'font.size': 3.5, 'xtick.major.pad': 0, 
-                     'ytick.major.pad': 5, 'axes.titlepad': 5,
-                     'xtick.bottom': False, 'ytick.left': False})
+plt.rcParams.update({'font.size': 20, 'xtick.major.pad': 15, 
+                     'ytick.major.pad': 40, 'axes.titlepad': 15,
+                     'xtick.bottom': False, 'ytick.left': False, 'figure.figsize': (70, 25)})
+
 
 class DetectChords:
     def __init__(self, seq_len, num_classes, feat_dim, context_s, crf_weights, cnn_net):
@@ -149,13 +150,12 @@ class DetectChords:
             fontsize='xx-large',
             )
 
-        chart.set_title(f'Chords for {self.song_name}', fontsize=15)
-        chart.set_ylabel('Chords', fontsize=10)
-        chart.set_xlabel('Seconds', fontsize=10)
+        chart.set_title(f'Chords for {self.song_name}', fontsize=70)
+        chart.set_ylabel('Chords', fontsize=50)
+        chart.set_xlabel('Seconds', fontsize=50)
 
-        plt.tight_layout()
-        plt.savefig(f'./annotations/{self.song_name}_Interval-{start//10}-{end//10}.png')
-        print('\nSaved predictions to the current working directory!')
+        #plt.tight_layout()
+        plt.savefig(f'./annotations/{self.song_name} - Interval - {start//10} - {end//10}.png')
 
 parser = argparse.ArgumentParser(description="Example script for chord sequence detection. \nNote: the script will do mp3 to wav conversion and store wav file in data!")
 parser.add_argument("--song", type=str, help="path to the song to transcribe")
@@ -183,12 +183,12 @@ while not exit:
             if start < end and start >= 0 and start < pred_shape[1] and end >= 0 and start < pred_shape[1]:
                 format = False
             else:
-                print('Start value is greater than end value! Please try again')
+                print('Start value is greater than end value! Please try again.')
         else:
             print('Sorry, wrong interval format. Please try again.')
 
     DC.visualize(start, end)
 
-    more = input('If you would like to save another time interval, enter MORE: ')
-    if more != 'MORE':
+    more = input('If you would like to save another time interval, press enter. Otherwise, enter EXIT: ')
+    if more != '':
         exit = True

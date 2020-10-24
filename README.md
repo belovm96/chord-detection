@@ -44,7 +44,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
 
 
 ## Usage
-*Note: Both ReChord App and ReChord Command Line Tool require GPU on your machine!*
+*Both ReChord App and ReChord Command Line Tool require GPU on your machine!*
 ### Web App
   * Clone this repository
   * From the repo's root directory `cd ChordDetection/app`

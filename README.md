@@ -6,9 +6,9 @@ A Tool for Chord Sequence Detection
 ## Table of Contents  
 - [Motivation](#Motivation)  
 - [Requirements](#Requirements)  
-- [Use Cases](#use-cases)
-    - [Web Application](#web-application)
-    - [Command Line Tool](#command-line-tool)
+- [Usage](#Usage)
+    - [Web App](#web-app)
+    - [Command Line](#command-line)
 - [Approach](#Approach)
     - [Preprocessing](#first-stage---preprocessing)
     - [Modeling](#second-stage---modeling)
@@ -42,9 +42,9 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
 * [FFmpeg](https://ffmpeg.org/download.html)
 
 
-## Use Cases
+## Usage
 Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU on your machine!
-### Web Application
+### Web App
   * Clone this repository
   * From the repo's root directory `cd ChordDetection/app`
   * Pull [this](https://hub.docker.com/layers/tensorflow/tensorflow/latest-gpu/images/sha256-37c7db66cc96481ac1ec43af2856ef65d3e664fd7f5df6b5e54855149f7f8594?context=explore) docker image - `docker pull tensorflow/tensorflow:latest-gpu`

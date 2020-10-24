@@ -64,9 +64,7 @@ Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU
   1. Run `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'` (inference takes 1-3 minutes, depending on GPU capabilities)
   2. Enter time interval `20:25`
   3. Chord - Time representation will be saved to annotations folder
-  
-  
-![example annotations](/annotations/U2%20-%20With%20or%20Without%20You_Interval-20-25.png)
+ 
 <p align="center">
   <img src="https://github.com/belovm96/chord-detection/blob/master/annotations/U2%20-%20With%20or%20Without%20You_Interval-20-25.png" />
 </p>

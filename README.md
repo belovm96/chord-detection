@@ -9,6 +9,7 @@ A Tool for Chord Sequence Detection
 - [Usage](#Usage)
     - [Web App](#web-app)
     - [Command Line](#command-line)
+    - [Example](#Example)
 - [Approach](#Approach)
     - [Preprocessing](#first-stage---preprocessing)
     - [Modeling](#second-stage---modeling)
@@ -59,9 +60,9 @@ Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU
     * The script will ask you to provide time interval of the song that you would like to annotate
     * Chord - Time representations will be saved to `annotations` folder in `png` format
     
-#### Example Use
-  1. Run `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'`
-  2. Input time interval `20:25`
+### Example
+  1. Run `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'` (inference takes 1-3 minutes, depending on GPU capabilities)
+  2. Enter time interval `20:25`
   3. Chord - Time representation will be saved to annotations folder, and it looks like this:
 ![example annotations](/annotations/U2 - With or Without You_Interval-20-25.png)
   

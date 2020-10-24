@@ -51,13 +51,19 @@ Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU
   * Create docker image - `docker image build -t streamlit:app . `
   * Run docker image - `docker container run --gpus all -p 8501:8501 streamlit:app`
   
-### Command Line Tool
+### Command Line
   * Clone this repository
   * Put a song that you would like to transcribe in `data` folder of the repo's root directory
   * To get chord transcriptions run `python transcribe.py --song ./data/song name`
     * If your song name has white spaces, please enclose it with quotes, e.g. `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'`
     * The script will ask you to provide time interval of the song that you would like to annotate
-    * Chord - Time representations will be saved to `annotations` folder in `.png` format
+    * Chord - Time representations will be saved to `annotations` folder in `png` format
+    
+#### Example Use
+  1. Run `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'`
+  2. Input time interval `20:25`
+  3. Chord - Time representation will be saved to annotations folder, and it looks like this:
+![example annotations](/annotations/U2 - With or Without You_Interval-20-25.png)
   
 ## Approach
 My data &#8594; model &#8594; predictions pipeline can be summarized as follows:

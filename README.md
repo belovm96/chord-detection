@@ -62,7 +62,7 @@ Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU
     
 ### Example
   - Run `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'` \ 
-  Inference takes 1-3 minutes, depending on your GPU capabilities)
+  Inference takes 1-3 minutes, depending on your GPU capabilities
   - Enter time interval `10:20`
   - Chord - Time representation will be saved to annotations 
   - Chord - Time Representation can be understood as follows:

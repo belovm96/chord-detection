@@ -44,7 +44,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
 
 
 ## Usage
-Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU on your machine!
+*Note: Both ReChord App and ReChord Command Line Tool require GPU on your machine!*
 ### Web App
   * Clone this repository
   * From the repo's root directory `cd ChordDetection/app`
@@ -65,7 +65,7 @@ Note: Dockerized ReChord Streamlit App and ReChord Command Line Tool require GPU
   *Inference takes 1-3 minutes, depending on your GPU capabilities.*
   - Enter time interval `10:20`
   - Chord - Time representation will be saved to annotations 
-  - Chord - Time Representation can be understood as follows:
+  - Chord - Time Representation can be perceived as follows:
     - y-axis - chords to play
     - x-axis - time in seconds
     - each purple square corresonds to which chord to play every 0.1-second time step. In the example below, do not play any chord from 10 to 12.5 seconds and play D chord from 12.5 to 20 seconds of the song time) 

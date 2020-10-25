@@ -161,3 +161,165 @@ class DetectChords:
 
         plt.tight_layout()
         plt.show()
+
+        
+       
+    class LogFiltSpec:
+    """
+    Generated logarithmically filetered spectrograms - note distance equalization step
+    """
+    def __init__(self, frame_size, num_bands, fmin, fmax, fps, unique_filters, sample_rate=44100, fold=None):
+        self.frame_size = frame_size
+        self.num_bands = num_bands
+        self.fmax = fmax
+        self.fmin = fmin
+        self.fps = fps
+        self.unique_filters = unique_filters
+        self.sample_rate = sample_rate
+
+    @property
+    def name(self):
+        return 'lfs_fps={}_num-bands={}_fmin={}_fmax={}_frame_sizes=[{}]'.format(
+                self.fps, self.num_bands, self.fmin, self.fmax,
+                '-'.join(map(str, self.frame_sizes))
+        ) + ('_uf' if self.unique_filters else '')
+
+    def __call__(self, audio_file):
+        spec = mm.audio.spectrogram.LogarithmicFilteredSpectrogram(
+                audio_file, num_channels=1, sample_rate=self.sample_rate,
+                fps=self.fps, frame_size=self.frame_size,
+                num_bands=self.num_bands, fmin=self.fmin, fmax=self.fmax,
+                unique_filters=self.unique_filters)
+        
+        return spec
+
+
+def one_hot(class_ids, num_classes):
+    """
+    Create one-hot encoding of class ids
+    """
+    oh = np.zeros((len(class_ids), num_classes), dtype=np.float32)
+    oh[np.arange(len(class_ids)), class_ids] = 1
+
+    assert (oh.argmax(axis=1) == class_ids).all()
+    assert (oh.sum(axis=1) == 1).all()
+
+    return oh
+
+
+class IntervalAnnotationTarget:
+    def __init__(self, fps, num_classes):
+        self.fps = fps
+        self.num_classes = num_classes
+
+    def _annotations_to_targets(self, annotations):
+        """
+        Class ID of 'no chord' should always be last!
+        """
+        raise NotImplementedError('Implement this')
+
+    def _targets_to_annotations(self, targets):
+        raise NotImplementedError('Implement this.')
+
+    def _dummy_target(self):
+        raise NotImplementedError('Implement this.')
+
+    def __call__(self, target_file, num_frames=None):
+        """
+        Creates one-hot encodings from an annotation file
+        """
+        ann = np.loadtxt(target_file,
+                         comments=None,
+                         dtype=[('start', np.float),
+                                ('end', np.float),
+                                ('label', 'S50')])
+        if num_frames is None:
+            num_frames = np.ceil(ann['end'][-1] * self.fps)
+        
+        # add a dummy class at the end and at the beginning,
+        # because some annotations miss it, are not exactly aligned at the end
+        # or do not start at the beginning of an audio file
+        targets = np.vstack((self._dummy_target(),
+                             self._annotations_to_targets(ann['label']),
+                             self._dummy_target()))
+        
+        # add the times for the dummy events
+        start = np.hstack(([-np.inf], ann['start'], ann['end'][-1]))
+        end = np.hstack((ann['start'][0], ann['end'], [np.inf]))
+        
+        frame_times = np.arange(num_frames, dtype=np.float) / self.fps
+        
+        start = np.round(start, decimals=3)
+        end = np.round(end, decimals=3)
+        frame_times = np.round(frame_times, decimals=3)
+        
+        target_per_frame = ((start <= frame_times[:, np.newaxis]) & (frame_times[:, np.newaxis] < end))
+        
+        assert (target_per_frame.sum(axis=1) == 1).all()
+        
+        return targets[np.nonzero(target_per_frame)[1]].astype(np.float32)
+        
+
+class ChordsMajMin(IntervalAnnotationTarget):
+    def __init__(self, fps):
+        # 25 classes - 12 minor, 12 major, one "No Chord"
+        super(ChordsMajMin, self).__init__(fps, 25)
+
+    @property
+    def name(self):
+        return 'chords_majmin_fps={}'.format(self.fps)
+
+    def _dummy_target(self):
+        dt = np.zeros(self.num_classes, dtype=np.float32)
+        dt[-1] = 1
+        return dt
+
+    def _annotations_to_targets(self, labels):
+        """
+        Maps chord annotations to 25 classes (12 major, 12 minor, 1 no chord)
+        :param labels: chord labels
+        :return: one-hot encoding of class id per annotation
+        """
+        roots = ['A','B','C','D','E','F','G']
+        natural = zip(roots, [0, 2, 3, 5, 7, 8, 10])
+        root_note_map = {}
+        for chord, num in natural:
+            root_note_map[chord] = num
+            root_note_map[chord + '#'] = (num + 1) % 12
+            root_note_map[chord + 'b'] = (num - 1) % 12
+
+        root_note_map['N'] = 24
+        root_note_map['X'] = 24
+       
+        labels = [c.decode('UTF-8') for c in labels]
+        chord_root_notes = [c.split(':')[0].split('/')[0] for c in labels]
+        chord_root_note_ids = np.array([root_note_map[crn] for crn in chord_root_notes])
+        
+        chord_type = [c.split(':')[1] if ':' in c else '' for c in labels]
+        chord_type_shift = np.array([12 if 'min' in chord_t or 'dim' in chord_t else 0 for chord_t in chord_type])
+        return one_hot(chord_root_note_ids + chord_type_shift, self.num_classes)
+
+
+class PreprocessFeatures:
+    def __init__(self, cur_dir, dir_aligned):
+        self.cur_dir = cur_dir
+        self.dir_aligned = dir_aligned
+        
+    def align(self):
+        """
+        Since features and targets do not align most of the time - aligning features and targets such that they are of equal shapes
+        """
+        features = np.load(self.cur_dir+'/'+'spec.npy', allow_pickle=True)
+        targets = np.load(self.cur_dir+'/'+'target.npy', allow_pickle=True)
+    
+        feat_num_frames = features.shape[0]
+        targ_num_frames = targets.shape[0]
+        
+        if feat_num_frames != targ_num_frames:
+            diff = feat_num_frames - targ_num_frames
+            if diff < 0:
+                targets =  targets[:feat_num_frames, :]
+            else:
+                features = features[:targ_num_frames:, :]
+            
+        return features.shape, targets.shape

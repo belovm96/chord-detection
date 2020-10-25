@@ -14,6 +14,7 @@ from tf2crf import CRF
 import warnings
 warnings.filterwarnings('ignore')
 
+# Recommended figure parameters for visualization
 plt.rcParams.update({'font.size': 20, 'xtick.major.pad': 15, 
                      'ytick.major.pad': 40, 'axes.titlepad': 15,
                      'xtick.bottom': False, 'ytick.left': False, 'figure.figsize': (70, 25)})

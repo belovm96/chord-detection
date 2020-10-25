@@ -63,7 +63,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
 ### Example
 *Example usage can be found in `notebooks`. Also, you can follow the steps below to get an idea of how ReChord can be used as a script.*
   - Run `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'`\
-  *Inference takes 1-3 minutes, depending on your GPU capabilities. During inference, the file will be converted to `wav` format and stored where in the same directory as your input song.*
+  *Inference takes 1-3 minutes, depending on your GPU capabilities. During inference, the file will be converted to `wav` format and stored in the same directory as your input song.*
   - Enter time interval `10:20`
   - Chord - Time representation will be saved to annotations 
   - Chord - Time representation can be perceived as follows:

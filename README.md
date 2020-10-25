@@ -61,6 +61,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
     * Chord - Time representations will be saved to `annotations` folder in `png` format
     
 ### Example
+*Example usage can be found in `notebooks`. Also, you can follow the steps below to get an idea of how ReChord can be used as a script.*
   - Run `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'`\
   *Inference takes 1-3 minutes, depending on your GPU capabilities. During inference, the file will be converted to `wav` format and stored in data*
   - Enter time interval `10:20`

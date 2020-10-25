@@ -163,8 +163,8 @@ class DetectChords:
         plt.show()
 
         
-       
-    class LogFiltSpec:
+
+class LogFiltSpec:
     """
     Generated logarithmically filetered spectrograms - note distance equalization step
     """

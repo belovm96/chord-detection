@@ -1,17 +1,17 @@
+# Language
 language: python
 python:
   - '3.7'
-#Install dependencies
-script:
-  - sudo apt-get install ffmpeg -y
+# Install dependencies
 install:
   - pip3 install cython
   - pip3 install -r requirements.txt
   - pip3 install pytest-cov
   - pip3 install coveralls
   - python setup.py install
-#Run the tests
+# Install ffmpeg and run the tests
 script:
+  - sudo apt-get install ffmpeg -y
   - coverage run -m pytest
   - coverage report -m
 after_success:

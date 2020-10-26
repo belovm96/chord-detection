@@ -60,8 +60,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
   * To get chord transcriptions run `python transcribe.py --song ./data/song name`
     * If your song name has white spaces, please enclose it with quotes, e.g. `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'`
     * The script will ask you to provide time interval of the song that you would like to annotate
-
-* Chord - Time representations will be saved to `annotations` folder in `png` format
+  * Chord - Time representations will be saved to `annotations` folder in `png` format
     
 ### Example
 *Example usage can be found in `notebooks`. Also, you can follow the steps below to get an idea of how ReChord can be used as a script.*

@@ -1,11 +1,7 @@
 [![Generic badge](https://img.shields.io/badge/Insight-Artificial%20Intelligence-lightgrey)](https://shields.io/)
 [![Build Status](https://travis-ci.com/belovm96/chord-detection.svg?branch=master)](https://travis-ci.com/github/belovm96/chord-detection)
-[![GitHub license](https://img.shields.io/github/license/belovm96/chord-detection)](https://github.com/belovm96/chord-detection/blob/master/LICENSE)
-
-![GitHub repo size](https://img.shields.io/github/repo-size/belovm96/chord-detection?style=plastic) 
-![GitHub language count](https://img.shields.io/github/languages/count/belovm96/chord-detection?style=plastic) 
-![GitHub top language](https://img.shields.io/github/languages/top/belovm96/chord-detection?style=plastic) 
-![GitHub last commit](https://img.shields.io/github/last-commit/belovm96/chord-detection?color=red&style=plastic)
+[![GitHub last commit](https://img.shields.io/github/last-commit/belovm96/chord-detection?color=green&style=plastic)
+[![GitHub license](https://img.shields.io/github/license/belovm96/chord-detection)](https://github.com/belovm96/chord-detection/blob/master/LICENSE) 
 
 # ReChord
 A Tool for Chord Sequence Detection

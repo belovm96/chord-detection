@@ -1,6 +1,6 @@
 [![Generic badge](https://img.shields.io/badge/Insight-Artificial%20Intelligence-lightgrey)](https://shields.io/)
 [![Build Status](https://travis-ci.com/belovm96/chord-detection.svg?branch=master)](https://travis-ci.com/github/belovm96/chord-detection)
-[![GitHub last commit](https://img.shields.io/github/last-commit/belovm96/chord-detection?color=green&style=plastic)
+![GitHub last commit](https://img.shields.io/github/last-commit/belovm96/chord-detection?color=green&style=plastic)
 [![GitHub license](https://img.shields.io/github/license/belovm96/chord-detection)](https://github.com/belovm96/chord-detection/blob/master/LICENSE) 
 
 # ReChord

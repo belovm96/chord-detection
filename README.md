@@ -19,11 +19,11 @@ A Tool for Chord Sequence Detection
 
 
 ## Motivation
-Chord Transcription is a skill of detecting chord progressions in a musical piece by ear. While the majority of musical instrument players use sheet music to learn songs, it is rare that a musician is trained enough to figure out a composition by ear alone. Moreover, chord transcription takes hours at times, especially for beginner musicians.
+Chord Transcription is a skill of detecting chord progressions in a musical piece by ear. While the majority of musical instrument players use sheet music to learn songs, it is rare that a musician is trained enough to figure out a composition by ear alone. Moreover, chord transcription can take hours, especially for beginner musicians.
 
-While it is easy to find sheet music or tabs for old time classics, that is not the case for newly released or more obscure music.
+While it is easy to find sheet music or tabs for classics, that is not the case for newly released or more obscure music.
 
-In this project, I aim to help musicians with chord transcription and introduce ReChord - web application that transcribes chords for you in just few minutes! 
+The goal of this project is to automate chord transcription, and to reduce the process from hours to just minutes. I would like to introduce ReChord - web application that transcribes chords for you in just few minutes! 
 
 I utilized my skills in Software Development, Deep Learning, Signal Processing, and Music Theory to create the application, and hope that it will prove to be useful for fellow musicians and music enthusiasts.
 
@@ -58,7 +58,8 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
   * To get chord transcriptions run `python transcribe.py --song ./data/song name`
     * If your song name has white spaces, please enclose it with quotes, e.g. `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'`
     * The script will ask you to provide time interval of the song that you would like to annotate
-    * Chord - Time representations will be saved to `annotations` folder in `png` format
+
+* Chord - Time representations will be saved to `annotations` folder in `png` format
     
 ### Example
 *Example usage can be found in `notebooks`. Also, you can follow the steps below to get an idea of how ReChord can be used as a script.*

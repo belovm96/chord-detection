@@ -61,7 +61,7 @@ class DetectChords:
 
     def mp3_to_wav(self, mp3_song):
         print('\n\nMp3 to wav conversion. Saving wav file to data...\n')
-        self.wav_song = mp3_song[:-3]+'wav'.replace(' ', '_')
+        self.wav_song = mp3_song[:-3]+'wav'
         self.song_name = mp3_song.split('/')[-1].replace('+', ' ')[:-4]
         subprocess.call(['ffmpeg', '-i', mp3_song, self.wav_song])
 

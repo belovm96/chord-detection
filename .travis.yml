@@ -3,9 +3,10 @@ python:
   - '3.7'
 #Install dependencies
 install:
-  - pip install -r requirements.txt
-  - pip install pytest-cov
-  - pip install coveralls
+  - pip3 install cython
+  - pip3 install -r requirements.txt
+  - pip3 install pytest-cov
+  - pip3 install coveralls
   - python setup.py install
 #Run the tests
 script:

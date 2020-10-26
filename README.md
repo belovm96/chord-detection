@@ -23,8 +23,7 @@ Chord Transcription is a skill of detecting chord progressions in a musical piec
 
 While it is easy to find sheet music or tabs for classics, that is not the case for newly released or more obscure music.
 
-The goal of this project is to automate chord transcription, and to reduce this process from hours to just minutes. \
-I would like to introduce ReChord - web application that transcribes chords for you in just few minutes! 
+Thus, I would like to introduce ReChord - web application that transcribes chords for you in just few minutes! 
 
 I utilized my skills in Software Development, Deep Learning, Signal Processing, and Music Theory to create the application, and hope that it will prove to be useful for fellow musicians and music enthusiasts.
 

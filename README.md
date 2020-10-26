@@ -19,11 +19,11 @@ A Tool for Chord Sequence Detection
 
 
 ## Motivation
-Chord Transcription is a skill of detecting chord progressions in a musical piece by ear. While the majority of musical instrument players use sheet music to learn songs, it is rare that a musician is trained enough to figure out a composition by ear alone. Moreover, chord transcription takes hours at times, especially for beginner musicians.
+Chord Transcription is a skill of detecting chord progressions in a musical piece by ear. While the majority of musical instrument players use sheet music to learn songs, it is rare that a musician is trained enough to figure out a composition by ear alone. Moreover, chord transcription can take hours, especially for beginner musicians.
 
-While it is easy to find sheet music or tabs for old time classics, that is not the case for newly released or more obscure music.
+While it is easy to find sheet music or tabs for classics, that is not the case for newly released or more obscure music.
 
-In this project, I aim to help musicians with chord transcription and introduce ReChord - web application that transcribes chords for you in just few minutes! 
+Thus, I would like to introduce ReChord - web application that transcribes chords for you in just few minutes! 
 
 I utilized my skills in Software Development, Deep Learning, Signal Processing, and Music Theory to create the application, and hope that it will prove to be useful for fellow musicians and music enthusiasts.
 
@@ -31,13 +31,14 @@ Learn more: [Slides](https://docs.google.com/presentation/d/14M2gyLT41rfnpafnfzj
 [Demo](https://drive.google.com/file/d/1uvhqbAUlB80Brls5BFPFogwyL811ilBw/view?usp=sharing)
 
 ## Requirements
+*You will need Python 3.7 or higher.*
+
 Please install dependencies:
 * Clone the repo with `git clone https://github.com/belovm96/chord-detection`
 * From the repo's root directory run `pip3 install -r requirements.txt`
-* Python 3.7 or higher
 
 
-If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpeg:
+If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpeg. Otherwise, just install FFmpeg:
 * [Docker](https://docs.docker.com/get-docker/)
 * [Streamlit](https://docs.streamlit.io/en/stable/installation.html)
 * [FFmpeg](https://ffmpeg.org/download.html)
@@ -49,8 +50,8 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
   * Clone this repository
   * From the repo's root directory `cd ChordDetection/app`
   * Pull [this](https://hub.docker.com/layers/tensorflow/tensorflow/latest-gpu/images/sha256-37c7db66cc96481ac1ec43af2856ef65d3e664fd7f5df6b5e54855149f7f8594?context=explore) docker image - `docker pull tensorflow/tensorflow:latest-gpu`
-  * Create docker image - `docker image build -t streamlit:app . `
-  * Run docker image - `docker container run --gpus all -p 8501:8501 streamlit:app`
+  * Create docker image of the app - `docker image build -t streamlit:app . `
+  * Run the app - `docker container run --gpus all -p 8501:8501 streamlit:app`
   
 ### Command Line
   * Clone this repository
@@ -58,7 +59,7 @@ If you would like to use ReChord App, you will need Docker, Streamlit, and FFmpe
   * To get chord transcriptions run `python transcribe.py --song ./data/song name`
     * If your song name has white spaces, please enclose it with quotes, e.g. `python transcribe.py --song ./data/'U2 - With Or Without You - Remastered.mp3'`
     * The script will ask you to provide time interval of the song that you would like to annotate
-    * Chord - Time representations will be saved to `annotations` folder in `png` format
+  * Chord - Time representations will be saved to `annotations` folder in `png` format
     
 ### Example
 *Example usage can be found in `notebooks`. Also, you can follow the steps below to get an idea of how ReChord can be used as a script.*

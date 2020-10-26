@@ -39,7 +39,8 @@ Please install dependencies:
 * From the repo's root directory run `pip3 install -r requirements.txt`
 
 
-If you would like to use ReChord App, you will need Docker and Streamlit. Otherwise, you will just need FFmpeg:
+If you would like to use ReChord App, you will need Docker, Streamlit, and Docker.\
+Otherwise, you will just need FFmpeg:
 * [Docker](https://docs.docker.com/get-docker/)
 * [Streamlit](https://docs.streamlit.io/en/stable/installation.html)
 * [FFmpeg](https://ffmpeg.org/download.html)

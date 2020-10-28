@@ -24,7 +24,7 @@ A Tool for Chord Sequence Detection
 ## Motivation
 Chord Transcription is a skill of detecting chord progressions in a musical piece by ear. While the majority of musical instrument players use sheet music to learn songs, it is rare that a musician is trained enough to figure out a composition by ear alone. Moreover, chord transcription can take hours, especially for beginner musicians.
 
-While it is easy to find sheet music or tabs for classics, that is not the case for newly released or more obscure music.
+In addition, while it is easy to find sheet music or tabs for classics, that is not the case for newly released or more obscure music.
 
 Therefore, I would like to introduce ReChord - web application that transcribes chords for you in just few minutes! 
 

@@ -26,10 +26,10 @@ plt.rcParams.update({'font.size': 20, 'xtick.major.pad': 15,
 
 
 class DetectChords(ChordDetection.DetectChords):
-    def __init__(self, seq_len=1024, num_classes=25, feat_dim=128, context_s=7, 
-                 crf_weights='../ChordDetection/app/model_01', cnn_net='../ChordDetection/app/cnn_extractor.h5'):
-        super().__init__(seq_len=1024, num_classes=25, feat_dim=128, context_s=7, 
-                 crf_weights='../ChordDetection/app/model_01', cnn_net='../ChordDetection/app/cnn_extractor.h5')
+    def __init__(self, seq_len, num_classes, feat_dim, context_s, 
+                 crf_weights, cnn_net):
+        super().__init__(seq_len, num_classes, feat_dim, context_s, 
+                 crf_weights, cnn_net)
     
     def visualize(self, start, end):
         start = start * 10
@@ -68,14 +68,15 @@ args = parser.parse_args()
 crf_weights = './ChordDetection/app/model_01'
 cnn_net = './ChordDetection/app/cnn_extractor.h5'
 
-DC = ChordDetection.DetectChords(1024, 25, 128, 7, crf_weights, cnn_net)
+DC = DetectChords(1024, 25, 128, 7, crf_weights, cnn_net)
 DC.build_cnn_extractor()
 DC.build_crf()
 DC.initialize_chord_axis()
 DC.mp3_to_wav(args.song)
 pred_shape = DC.predict_seq()
 exit = False
-print('\n\nSuggested time interval - less or equal to 10 seconds for a more readable visual representation!\n')
+print('\nSuggested time interval - less or equal to 10 seconds for a more readable visual representation!\n')
+print(f'Song ends at {pred_shape}th second.\n')
 while not exit:
     format = True
     while format:

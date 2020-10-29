@@ -76,7 +76,7 @@ DC.mp3_to_wav(args.song)
 pred_shape = DC.predict_seq()
 exit = False
 print('\nSuggested time interval - less or equal to 10 seconds for a more readable visual representation!\n')
-print(f'Song ends at {pred_shape[1]}th second.\n')
+print(f'Song ends at {pred_shape[1]//10}th second.\n')
 while not exit:
     format = True
     while format:
